@@ -1,4 +1,5 @@
-<div 
+<a 
+    routerLink="/pantheons/{{pantheon.name.toLowerCase()}}"
     *ngIf="pantheon"
     class="pantheon"
 >
@@ -16,4 +17,4 @@
             <img src="{{champion.avatar}}" alt="">
         </div>
     </div>
-</div>
+</a>

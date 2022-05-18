@@ -5,12 +5,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PantheonsComponent } from './pantheons/pantheons.component';
 import { PantheonDetailComponent } from './pantheon-detail/pantheon-detail.component';
+import { PantheonComponent } from './pantheon/pantheon.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PantheonsComponent,
-    PantheonDetailComponent
+    PantheonDetailComponent,
+    PantheonComponent
   ],
   imports: [
     BrowserModule,
