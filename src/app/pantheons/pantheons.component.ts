@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { PANTHEONS } from '../mock-pantheons';
+import { Pantheon } from '../pantheon';
+import { PantheonService } from '../pantheon.service';
 
 @Component({
   selector: 'app-pantheons',
@@ -8,9 +9,15 @@ import { PANTHEONS } from '../mock-pantheons';
 })
 export class PantheonsComponent implements OnInit {
   title = 'Ancient Champions';
-  pantheons = PANTHEONS;
+  pantheons: Pantheon[] = [];
 
-  constructor() {}
+  constructor(private pantheonService: PantheonService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getPantheons();
+  }
+
+  getPantheons(): void {
+    this.pantheons = this.pantheonService.getPantheons();
+  }
 }
