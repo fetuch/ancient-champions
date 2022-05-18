@@ -2,21 +2,6 @@
 
 <ul class="pantheons">
     <li *ngFor="let pantheon of pantheons">
-        <div class="pantheon">
-            <div class="pantheon__banner">
-                <img src="{{pantheon.banner}}" alt="">
-
-                <h2 class="pantheon__name">{{pantheon.name}}</h2>
-            </div>
-
-            <div class="pantheon__champions">
-                <div 
-                    *ngFor="let champion of pantheon.champions"
-                    class="pantheon__champion"
-                >
-                    <img src="{{champion.avatar}}" alt="">
-                </div>
-            </div>
-        </div>
+        <app-pantheon-detail [pantheon]="pantheon"></app-pantheon-detail>
     </li>
 </ul>
