@@ -1,0 +1,13 @@
+<h1 class="title">{{ title }}</h1>
+
+<ul class="pantheons">
+    <li *ngFor="let pantheon of pantheons">
+        <div class="pantheon">
+            <div class="pantheon__banner">
+                <img src="{{pantheon.banner}}" alt="">
+
+                <h2 class="pantheon__name">{{pantheon.name}}</h2>
+            </div>
+        </div>
+    </li>
+</ul>
