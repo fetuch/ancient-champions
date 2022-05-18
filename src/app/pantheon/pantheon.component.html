@@ -1,1 +1,25 @@
-<p>pantheon works!</p>
+<div *ngIf="pantheon">
+    <h1 class="title">{{pantheon.name}}</h1>
+
+    <ul class="champions">
+        <li *ngFor="let champion of pantheon.champions">
+            <div class="champion">
+                <div class="champion__hero">
+                    <img src="{{pantheon.banner}}" alt="">
+                </div>
+
+                <div class="champion__main">
+                    <img class="champion__avatar" src="{{ champion.avatar }}" alt="">
+                    <div class="champion__details">
+                        <span class="champion__name">{{ champion.name }}</span>
+                    </div>
+                </div>
+
+                <div class="champion__stats">
+                    <span>Attack: {{champion.attack}}</span>
+                    <span>Defence: {{champion.defence}}</span>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
