@@ -29,7 +29,7 @@ export class InMemoryDataService implements InMemoryDbService {
       },
     ];
 
-    return { pantheons, teams };
+    return { pantheons, teams, champions };
   }
 
   genId(teams: Team[]): number {

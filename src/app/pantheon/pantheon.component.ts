@@ -57,7 +57,7 @@ export class PantheonComponent implements OnInit {
     );
   }
 
-  startABattle(): void {
+  confirmTheTeamSquad(): void {
     const members = this.selectedChampions;
 
     this.teamService.registerTeam({ members } as Team).subscribe((team) => {

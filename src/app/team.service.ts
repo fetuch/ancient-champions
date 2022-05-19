@@ -18,4 +18,10 @@ export class TeamService {
   registerTeam(team: Team): Observable<Team> {
     return this.http.post<Team>(this.teamsUrl, team, this.httpOptions);
   }
+
+  getTeam(id: number): Observable<Team> {
+    const url = `${this.teamsUrl}/${id}`;
+
+    return this.http.get<Team>(url);
+  }
 }

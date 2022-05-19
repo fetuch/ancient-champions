@@ -74,7 +74,7 @@ export const CHAMPIONS: Champion[] = [
   {
     pantheon: 'Greek',
     name: 'Artemis',
-    avatar: baseImgUrl + 'ra.jpg',
+    avatar: baseImgUrl + 'artemis.jpg',
     attack: baseAttack,
     defence: baseDefence,
     hp: baseHP,

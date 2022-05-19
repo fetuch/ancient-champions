@@ -1,0 +1,19 @@
+<div *ngIf="!opponents">Choosing the opposite team...</div>
+
+<div *ngIf="opponents">
+    <div>
+        <span *ngFor="let member of opponents[0].members">
+            {{member.name}}
+        </span>
+    
+        <span>VS</span>
+    
+        <span *ngFor="let member of opponents[1].members">
+            {{member.name}}
+        </span>
+    </div>
+
+    <div style="margin-top: 1em;">
+        <button (click)="startTheBattle()">FIGHT!!!</button>
+    </div>
+</div>
