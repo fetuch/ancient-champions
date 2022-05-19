@@ -18,6 +18,8 @@ export class PantheonsComponent implements OnInit {
   }
 
   getPantheons(): void {
-    this.pantheons = this.pantheonService.getPantheons();
+    this.pantheonService
+      .getPantheons()
+      .subscribe((pantheons) => (this.pantheons = pantheons));
   }
 }

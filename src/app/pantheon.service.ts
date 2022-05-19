@@ -10,15 +10,17 @@ import { Observable, of } from 'rxjs';
 export class PantheonService {
   constructor() {}
 
-  getPantheons(): Pantheon[] {
-    return PANTHEONS.map((pantheon) => {
-      return {
-        ...pantheon,
-        champions: CHAMPIONS.filter(
-          (champion) => champion.pantheon === pantheon.name
-        ),
-      };
-    });
+  getPantheons(): Observable<Pantheon[]> {
+    return of(
+      PANTHEONS.map((pantheon) => {
+        return {
+          ...pantheon,
+          champions: CHAMPIONS.filter(
+            (champion) => champion.pantheon === pantheon.name
+          ),
+        };
+      })
+    );
   }
 
   getPantheon(name: string): Observable<Pantheon> {
