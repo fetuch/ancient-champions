@@ -1,38 +1,45 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { catchError } from 'rxjs/operators';
+
 import { Pantheon } from './pantheon';
-import { PANTHEONS } from './mock-pantheons';
-import { CHAMPIONS } from './mock-champions';
 import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PantheonService {
-  constructor() {}
+  private pantheonsUrl = 'api/pantheons';
+
+  constructor(private http: HttpClient) {}
 
   getPantheons(): Observable<Pantheon[]> {
-    return of(
-      PANTHEONS.map((pantheon) => {
-        return {
-          ...pantheon,
-          champions: CHAMPIONS.filter(
-            (champion) => champion.pantheon === pantheon.name
-          ),
-        };
-      })
-    );
+    return this.http
+      .get<Pantheon[]>(this.pantheonsUrl)
+      .pipe(catchError(this.handleError<Pantheon[]>('getPantheons', [])));
   }
 
-  getPantheon(name: string): Observable<Pantheon> {
-    const pantheon = PANTHEONS.find(
-      (pantheon) => pantheon.name.toLowerCase() === name
-    )!;
+  getPantheon(id: number): Observable<Pantheon> {
+    const url = `${this.pantheonsUrl}/${id}`;
+    return this.http
+      .get<Pantheon>(url)
+      .pipe(catchError(this.handleError<Pantheon>(`getPantheon id=${id}`)));
+  }
 
-    return of({
-      ...pantheon,
-      champions: CHAMPIONS.filter(
-        (champion) => champion.pantheon === pantheon.name
-      ),
-    });
+  /**
+   * Handle Http operation that failed.
+   * Let the app continue.
+   *
+   * @param operation - name of the operation that failed
+   * @param result - optional value to return as the observable result
+   */
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+      // TODO: send the error to remote logging infrastructure
+      console.error(error); // log to console instead
+
+      // Let the app keep running by returning an empty result.
+      return of(result as T);
+    };
   }
 }

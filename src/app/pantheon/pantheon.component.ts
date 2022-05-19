@@ -24,10 +24,10 @@ export class PantheonComponent implements OnInit {
   }
 
   getPantheon(): void {
-    const name = this.route.snapshot.paramMap.get('name')!;
+    const id = Number(this.route.snapshot.paramMap.get('id'));
 
     this.pantheonService
-      .getPantheon(name)
+      .getPantheon(id)
       .subscribe((pantheon) => (this.pantheon = pantheon));
   }
 

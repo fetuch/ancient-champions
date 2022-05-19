@@ -5,7 +5,7 @@ import { PantheonsComponent } from './pantheons/pantheons.component';
 
 const routes: Routes = [
   { path: '', component: PantheonsComponent },
-  { path: 'pantheons/:name', component: PantheonComponent },
+  { path: 'pantheons/:id', component: PantheonComponent },
 ];
 
 @NgModule({
