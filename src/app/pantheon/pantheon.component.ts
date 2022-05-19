@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Champion } from '../champion';
 import { Pantheon } from '../pantheon';
 import { PantheonService } from '../pantheon.service';
@@ -17,6 +17,7 @@ export class PantheonComponent implements OnInit {
   requiredChampions: number = 3;
 
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private pantheonService: PantheonService,
     private teamService: TeamService
@@ -58,9 +59,9 @@ export class PantheonComponent implements OnInit {
 
   startABattle(): void {
     const members = this.selectedChampions;
-    // register team
-    this.teamService
-      .registerTeam({ members } as Team)
-      .subscribe((team) => console.log({ team }));
+
+    this.teamService.registerTeam({ members } as Team).subscribe((team) => {
+      this.router.navigate([`/battle/${team.id}`]);
+    });
   }
 }
