@@ -25,7 +25,7 @@ export class InMemoryDataService implements InMemoryDbService {
     const teams: Team[] = [
       {
         id: 1,
-        members: champions.slice(0, 2),
+        members: champions.slice(0, 3),
       },
     ];
 
