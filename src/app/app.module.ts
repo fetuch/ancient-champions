@@ -11,6 +11,7 @@ import { PantheonDetailComponent } from './pantheon-detail/pantheon-detail.compo
 import { PantheonComponent } from './pantheon/pantheon.component';
 import { InMemoryDataService } from './in-memory-data.service';
 import { BattleComponent } from './battle/battle.component';
+import { BattleLogsComponent } from './battle-logs/battle-logs.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { BattleComponent } from './battle/battle.component';
     PantheonDetailComponent,
     PantheonComponent,
     BattleComponent,
+    BattleLogsComponent,
   ],
   imports: [
     BrowserModule,

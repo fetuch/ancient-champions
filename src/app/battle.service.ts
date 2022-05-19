@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BattleLogService } from './battle-log.service';
 import { Pantheon } from './pantheon';
 import { Team } from './team';
 
@@ -6,10 +7,17 @@ import { Team } from './team';
   providedIn: 'root',
 })
 export class BattleService {
+  constructor(private battleLogService: BattleLogService) {}
+
   createTemporaryTeam(pantheon: Pantheon): Team {
     const team = pantheon
       .champions!.sort(() => Math.random() - 0.5)
       .slice(0, 3);
+
+    this.battleLogService.add(
+      'BattleService: Opponent team has been selected.'
+    );
+
     return { members: team } as Team;
   }
 
@@ -24,6 +32,6 @@ export class BattleService {
   }
 
   start(opponents: Team[] | undefined): void {
-    console.log('The battle has started.');
+    this.battleLogService.add('BattleService: So it has begun!');
   }
 }
