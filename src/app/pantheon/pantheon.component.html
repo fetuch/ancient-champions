@@ -3,7 +3,11 @@
 
     <ul class="champions">
         <li *ngFor="let champion of pantheon.champions">
-            <div class="champion">
+            <div 
+                (click)="toggleSelectedChampion(champion)"
+                [class.selected]="selectedChampions.includes(champion)"
+                class="champion"
+            >
                 <div class="champion__hero">
                     <img src="{{pantheon.banner}}" alt="">
                 </div>
@@ -22,4 +26,15 @@
             </div>
         </li>
     </ul>
+
+    <div>
+        <div class="team" style="margin-bottom: 1em;">
+            Your team: 
+            <span *ngFor="let champion of selectedChampions">
+                {{champion.name}}
+            </span>
+        </div>
+
+        <button (click)="startABattle()" [disabled]="selectedChampions.length !== requiredChampions">Start a battle</button>
+    </div>
 </div>
