@@ -4,6 +4,7 @@ import { Pantheon } from './pantheon';
 import { Champion } from './champion';
 import { CHAMPIONS } from './mock-champions';
 import { PANTHEONS } from './mock-pantheons';
+import { Team } from './team';
 
 @Injectable({
   providedIn: 'root',
@@ -21,6 +22,17 @@ export class InMemoryDataService implements InMemoryDbService {
       };
     });
 
-    return { pantheons };
+    const teams: Team[] = [
+      {
+        id: 1,
+        members: champions.slice(0, 2),
+      },
+    ];
+
+    return { pantheons, teams };
+  }
+
+  genId(teams: Team[]): number {
+    return teams.length > 0 ? Math.max(...teams.map((team) => team.id)) + 1 : 1;
   }
 }

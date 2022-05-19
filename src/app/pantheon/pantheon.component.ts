@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Champion } from '../champion';
 import { Pantheon } from '../pantheon';
 import { PantheonService } from '../pantheon.service';
+import { Team } from '../team';
+import { TeamService } from '../team.service';
 
 @Component({
   selector: 'app-pantheon',
@@ -16,7 +18,8 @@ export class PantheonComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private pantheonService: PantheonService
+    private pantheonService: PantheonService,
+    private teamService: TeamService
   ) {}
 
   ngOnInit(): void {
@@ -54,9 +57,10 @@ export class PantheonComponent implements OnInit {
   }
 
   startABattle(): void {
+    const members = this.selectedChampions;
     // register team
-    console.log(this.selectedChampions);
-    // pick oponent team
-    // start a battle
+    this.teamService
+      .registerTeam({ members } as Team)
+      .subscribe((team) => console.log({ team }));
   }
 }
