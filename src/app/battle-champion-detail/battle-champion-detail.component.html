@@ -1,0 +1,14 @@
+<div
+    *ngIf="champion"
+    class="champion"
+>
+    <img [class.dead]="champion.hp <=0" src="{{champion.avatar}}" alt="">
+
+    <div class="champion__name"><span>{{champion.name}}</span></div>
+
+    <div class="champion__stats">
+        <div class="champion__stat champion__stat--hp"><span class="material-icons">favorite</span> {{champion.hp}}</div>
+        <div class="champion__stat champion__stat--defence"><span class="material-icons">shield</span> {{champion.defence}}</div>
+        <div class="champion__stat champion__stat--attack"><span class="material-icons">gavel</span> {{champion.attack}}</div>
+    </div>
+</div>
