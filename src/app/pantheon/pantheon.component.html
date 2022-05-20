@@ -1,6 +1,8 @@
 <div *ngIf="pantheon">
     <h1 class="title">{{pantheon.name}}</h1>
 
+    <p class="hint">Pick three champions</p>
+
     <ul class="champions">
         <li *ngFor="let champion of pantheon.champions">
             <div 
@@ -28,12 +30,12 @@
     </ul>
 
     <div>
-        <div class="team" style="margin-bottom: 1em;">
+        <p class="hint">
             Your team: 
             <span *ngFor="let champion of selectedChampions">
                 {{champion.name}}
             </span>
-        </div>
+        </p>
 
         <button (click)="confirmTheTeamSquad()" [disabled]="selectedChampions.length !== requiredChampions">Confirm</button>
     </div>

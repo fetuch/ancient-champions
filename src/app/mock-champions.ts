@@ -48,8 +48,8 @@ export const CHAMPIONS: Champion[] = [
   },
   {
     pantheon: 'Egyptian',
-    name: 'Shakti',
-    avatar: baseImgUrl + 'shakti.jpg',
+    name: 'Osiris',
+    avatar: baseImgUrl + 'osiris.jpg',
     attack: baseAttack + Math.floor(Math.random() * 3) + 1,
     defence: baseDefence + Math.floor(Math.random() * 3) + 1,
     hp: baseHP + Math.floor(Math.random() * 3) + 1,
@@ -65,8 +65,8 @@ export const CHAMPIONS: Champion[] = [
   },
   {
     pantheon: 'Greek',
-    name: 'Posejdon',
-    avatar: baseImgUrl + 'posejdon.jpg',
+    name: 'Poseidon',
+    avatar: baseImgUrl + 'poseidon.jpg',
     attack: baseAttack + Math.floor(Math.random() * 3) + 1,
     defence: baseDefence + Math.floor(Math.random() * 3) + 1,
     hp: baseHP + Math.floor(Math.random() * 3) + 1,
