@@ -11,17 +11,6 @@
         </div>
 
         <div>
-            <div>
-                <span *ngFor="let member of opponents[0].members">
-                    {{member.name}} [{{member.hp}}hp]
-                </span>
-            
-                <span>VS</span>
-            
-                <span *ngFor="let member of opponents[1].members">
-                    {{member.name}} [{{member.hp}}hp]
-                </span>
-            </div>
             <div style="margin: 1em 0;">
                 <button (click)="startTheBattle()">FIGHT!!!</button>
             </div>

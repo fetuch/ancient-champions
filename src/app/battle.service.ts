@@ -29,6 +29,7 @@ export class BattleService {
     this.rounds--;
 
     if (this.rounds > 0 && this.areTeamsAlive()) {
+      this.log('Next round');
       await this.playNextRound();
     } else {
       //exit game
@@ -54,10 +55,20 @@ export class BattleService {
     );
 
     if (opponent && champion.hp > 0) {
-      opponent.hp -= champion.attack;
+      const damage =
+        champion.attack - opponent.defence > 0
+          ? champion.attack - opponent.defence
+          : 0;
+
+      opponent.hp -= damage;
+
       this.log(
-        `${champion.name} [${champion.pantheon}] damages ${opponent.name} [${opponent.pantheon}] for ${champion.attack} HP.`
+        `${champion.name} attacks ${opponent.name} for ${damage}dmg (${opponent.defence} negated). `
       );
+
+      if (opponent.hp <= 0) {
+        this.log(`${opponent.name} dies.`);
+      }
     }
 
     this.currentChampionIndex++;
@@ -67,12 +78,10 @@ export class BattleService {
   }
 
   displaySummary(): void {
-    this.opponents!.reduce(
-      (total: Champion[], current: Team) => [...total, ...current.members],
-      []
-    ).forEach((champion) => {
-      this.log(`${champion.name} [${champion.pantheon}] HP ${champion.hp}`);
-    });
+    const winningTeam = this.opponents?.find((team) =>
+      team.members.some((member) => member.hp > 0)
+    );
+    this.log(`Team ${winningTeam?.members[0].pantheon} wins!!!`);
   }
 
   /**

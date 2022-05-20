@@ -2,7 +2,7 @@ import { Champion } from './champion';
 
 const baseImgUrl = '/assets/champions/';
 const baseHP = 10;
-const baseAttack = 2;
+const baseAttack = 5;
 const baseDefence = 2;
 
 export const CHAMPIONS: Champion[] = [
