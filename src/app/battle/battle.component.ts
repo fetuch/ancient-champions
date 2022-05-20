@@ -50,6 +50,6 @@ export class BattleComponent implements OnInit {
   }
 
   startTheBattle(): void {
-    this.battleService.start(this.opponents!);
+    this.battleService.init(this.opponents!);
   }
 }

@@ -10,67 +10,68 @@ import { Team } from './team';
 export class BattleService {
   opponents?: Team[];
   rounds: number = 10;
+  champions: Champion[] = [];
+  currentChampion?: Champion;
+  currentChampionIndex: number = 0;
+  delayMiliseconds: number = 300;
 
   constructor(private battleLogService: BattleLogService) {}
 
-  createTemporaryTeam(pantheon: Pantheon): Team {
-    const team = pantheon
-      .champions!.sort(() => Math.random() - 0.5)
-      .slice(0, 3);
-
-    this.battleLogService.add('Opponent team has been selected.');
-
-    return { members: team } as Team;
-  }
-
-  getAvailablePantheons(pantheons: Pantheon[], team: Team): Pantheon[] {
-    return pantheons.filter(
-      (pantheon) => pantheon.name !== team.members[0].pantheon
-    );
-  }
-
-  getRandomPantheon(pantheons: Pantheon[]): Pantheon {
-    return pantheons[Math.floor(Math.random() * pantheons.length)];
-  }
-
-  start(opponents: Team[]): void {
+  init(opponents: Team[]): void {
     this.opponents = opponents;
-    this.battleLogService.add('So it has begun!');
 
-    while (this.rounds > 0 && this.areTeamsAlive()) {
-      this.battleLogService.add('Round');
-      this.rounds--;
-      this.playARound();
+    // Recursive call untill end of game
+    this.playNextRound();
+  }
+
+  async playNextRound() {
+    await this.currentRound();
+    this.rounds--;
+
+    if (this.rounds > 0 && this.areTeamsAlive()) {
+      await this.playNextRound();
+    } else {
+      //exit game
+      this.displaySummary();
+    }
+  }
+
+  async currentRound(): Promise<void> {
+    // determine the order of the movements of each individual champion
+    this.champions = this.orderChampions();
+
+    //all champions should make their move
+    await this.championTurn(this.champions[this.currentChampionIndex]);
+
+    this.currentChampionIndex = 0;
+  }
+
+  async championTurn(champion: Champion): Promise<void> {
+    await this.delay(this.delayMiliseconds);
+
+    const opponent = this.pickLivingOpponent(
+      this.champions.filter((item) => item.pantheon !== champion.pantheon)
+    );
+
+    if (opponent && champion.hp > 0) {
+      opponent.hp -= champion.attack;
+      this.log(
+        `${champion.name} [${champion.pantheon}] damages ${opponent.name} [${opponent.pantheon}] for ${champion.attack} HP.`
+      );
     }
 
-    this.battleLogService.add('Finish');
+    this.currentChampionIndex++;
+    if (this.currentChampionIndex < this.champions.length) {
+      await this.championTurn(this.champions[this.currentChampionIndex]);
+    }
+  }
 
-    const summary = this.opponents!.reduce(
+  displaySummary(): void {
+    this.opponents!.reduce(
       (total: Champion[], current: Team) => [...total, ...current.members],
       []
     ).forEach((champion) => {
-      this.battleLogService.add(
-        `${champion.name} [${champion.pantheon}] HP ${champion.hp}`
-      );
-    });
-  }
-
-  playARound(): void {
-    // determine the order of the movements of each individual champion
-    const champions = this.orderChampions();
-
-    champions.forEach((champion) => {
-      const opponent = this.pickLivingOpponent(
-        champions.filter((member) => member.pantheon !== champion.pantheon)
-      );
-
-      if (opponent) {
-        opponent.hp -= champion.attack;
-
-        this.battleLogService.add(
-          `${champion.name} [${champion.pantheon}] damages ${opponent.name} [${opponent.pantheon}] for ${champion.attack}hp, Current ${opponent.name}'s HP: ${opponent.hp}`
-        );
-      }
+      this.log(`${champion.name} [${champion.pantheon}] HP ${champion.hp}`);
     });
   }
 
@@ -103,5 +104,34 @@ export class BattleService {
         .sort(() => Math.random() - 0.5)
         .find((champion) => champion.hp > 0) ?? null
     );
+  }
+
+  createTemporaryTeam(pantheon: Pantheon): Team {
+    const team = pantheon
+      .champions!.sort(() => Math.random() - 0.5)
+      .slice(0, 3);
+
+    this.log('Opponent team has been selected.');
+
+    return { members: team } as Team;
+  }
+
+  getAvailablePantheons(pantheons: Pantheon[], team: Team): Pantheon[] {
+    return pantheons.filter(
+      (pantheon) => pantheon.name !== team.members[0].pantheon
+    );
+  }
+
+  getRandomPantheon(pantheons: Pantheon[]): Pantheon {
+    return pantheons[Math.floor(Math.random() * pantheons.length)];
+  }
+
+  delay(ms: number) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+
+  /** Log a BattleService message with the BattleLogService */
+  private log(message: string) {
+    this.battleLogService.add(message);
   }
 }
