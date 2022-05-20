@@ -2,3 +2,55 @@
     display: flex
     justify-content: space-around
     align-items: start
+
+img.dead
+    filter: grayscale(100%)
+
+.member
+    position: relative
+
+.member__name
+    position: absolute
+    bottom: 2em
+    width: 100%
+    padding: .3em 0
+    span
+        position: relative
+        z-index: 1
+        font-size: 1.2em
+
+.member__stats
+    display: grid
+    grid-template-columns: repeat(3, 1fr)
+    position: absolute
+    bottom: 0
+    width: 100%
+
+.member__name, .member__stats
+    color: #fff
+    &::after
+        content: ''
+        position: absolute
+        top: 0
+        left: 0
+        width: 100%
+        height: 100%
+        background: rgba(0, 0, 0, 0.5)
+
+.member__stat
+    display: flex
+    justify-content: center
+    align-items: center
+    height: 2em
+    z-index: 1
+    span
+        margin-right: .2em
+
+.member__stat--hp span
+    color: #00ff40
+
+.member__stat--defence span
+    color: #0044ff
+
+.member__stat--attack span
+    color: #ff0000
