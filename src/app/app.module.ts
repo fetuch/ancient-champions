@@ -13,6 +13,7 @@ import { InMemoryDataService } from './in-memory-data.service';
 import { BattleComponent } from './battle/battle.component';
 import { BattleLogsComponent } from './battle-logs/battle-logs.component';
 import { BattleChampionDetailComponent } from './battle-champion-detail/battle-champion-detail.component';
+import { ChampionDetailComponent } from './champion-detail/champion-detail.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { BattleChampionDetailComponent } from './battle-champion-detail/battle-c
     BattleComponent,
     BattleLogsComponent,
     BattleChampionDetailComponent,
+    ChampionDetailComponent,
   ],
   imports: [
     BrowserModule,

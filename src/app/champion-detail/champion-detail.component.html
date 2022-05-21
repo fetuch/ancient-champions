@@ -1,0 +1,22 @@
+<div
+    *ngIf="champion"
+    (click)="toggleSelectedChampion()"
+    [class.selected]="selected"
+    class="champion"
+>
+    <div class="champion__hero">
+        <img src="{{banner}}" alt="">
+    </div>
+
+    <div class="champion__main">
+        <img class="champion__avatar" src="{{ champion.avatar }}" alt="">
+        <div class="champion__details">
+            <span class="champion__name">{{ champion.name }}</span>
+        </div>
+    </div>
+
+    <div class="champion__stats">
+        <span>Attack: {{champion?.attack}}</span>
+        <span>Defence: {{champion?.defence}}</span>
+    </div>
+</div>

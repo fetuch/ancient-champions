@@ -5,27 +5,12 @@
 
     <ul class="champions">
         <li *ngFor="let champion of pantheon.champions">
-            <div 
-                (click)="toggleSelectedChampion(champion)"
-                [class.selected]="selectedChampions.includes(champion)"
-                class="champion"
-            >
-                <div class="champion__hero">
-                    <img src="{{pantheon.banner}}" alt="">
-                </div>
-
-                <div class="champion__main">
-                    <img class="champion__avatar" src="{{ champion.avatar }}" alt="">
-                    <div class="champion__details">
-                        <span class="champion__name">{{ champion.name }}</span>
-                    </div>
-                </div>
-
-                <div class="champion__stats">
-                    <span>Attack: {{champion.attack}}</span>
-                    <span>Defence: {{champion.defence}}</span>
-                </div>
-            </div>
+            <app-champion-detail 
+                [champion]="champion" 
+                [selected]="selectedChampions.includes(champion)"
+                [banner]="pantheon.banner"
+                (itemEvent)="toggleSelectedChampion($event)"
+            ></app-champion-detail>
         </li>
     </ul>
 
