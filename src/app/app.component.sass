@@ -1,5 +1,17 @@
-.content
-    padding: 1em
-    text-align: center
-    max-width: 1400px
-    margin: 0 auto
+.nav-link
+    @apply inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium
+
+.nav-link.active
+    @apply border-indigo-500 text-gray-900
+
+.nav-link:not(.active)
+    @apply border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700
+
+.mobile-nav-link
+    @apply block pl-3 pr-4 py-2 border-l-4 text-base font-medium
+
+.mobile-nav-link.active
+    @apply bg-indigo-50 border-indigo-500 text-indigo-700
+
+.mobile-nav-link:not(.active)
+    @apply border-transparent text-gray-500
