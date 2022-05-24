@@ -10,4 +10,8 @@ export class BattleLogService {
   add(log: Log) {
     this.logs.push(log);
   }
+
+  clear(): void {
+    this.logs = [];
+  }
 }

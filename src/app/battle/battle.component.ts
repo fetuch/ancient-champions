@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { BattleLogService } from '../battle-log.service';
 import { BattleService } from '../battle.service';
 import { PantheonService } from '../pantheon.service';
 
@@ -18,7 +19,8 @@ export class BattleComponent implements OnInit {
     private route: ActivatedRoute,
     private teamService: TeamService,
     private pantheonService: PantheonService,
-    private battleService: BattleService
+    private battleService: BattleService,
+    private battleLogService: BattleLogService
   ) {}
 
   ngOnInit(): void {
@@ -26,6 +28,8 @@ export class BattleComponent implements OnInit {
   }
 
   prepareBattleStage(): void {
+    this.battleLogService.clear();
+
     const id = Number(this.route.snapshot.paramMap.get('id'));
 
     this.teamService.getTeam(id).subscribe((team) => {
