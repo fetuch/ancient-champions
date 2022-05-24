@@ -12,9 +12,7 @@
 
     <div class="mt-12 relative sm:max-w-lg sm:mx-auto lg:mt-0 lg:max-w-none lg:mx-0 lg:col-span-6 lg:flex lg:items-center">
       <div class="relative mx-auto w-full rounded-lg shadow-lg lg:max-w-md">
-        <video class="rounded-lg" controls preload="auto">
-          <source src="{{preview}}" type='video/mp4'>
-        </video>
+        <app-pantheon-detail [pantheon]="pantheon"></app-pantheon-detail>
       </div>
     </div>
   </div>
@@ -23,7 +21,6 @@
     <app-feature-list></app-feature-list>
   </div>
 
-  <!-- This example requires Tailwind CSS v2.0+ -->
   <div class="text-center">
     <div class="max-w-3xl mx-auto text-center">
       <h2 class="text-3xl font-extrabold text-gray-900">Ready to dive in?</h2>
