@@ -13,6 +13,7 @@ import { TeamService } from '../team.service';
   styleUrls: ['./battle.component.sass'],
 })
 export class BattleComponent implements OnInit {
+  startDisabled: boolean = false;
   opponents: Team[] = [];
 
   constructor(
@@ -28,6 +29,7 @@ export class BattleComponent implements OnInit {
   }
 
   prepareBattleStage(): void {
+    this.startDisabled = false;
     this.battleLogService.clear();
 
     const id = Number(this.route.snapshot.paramMap.get('id'));
@@ -60,6 +62,8 @@ export class BattleComponent implements OnInit {
   }
 
   startTheBattle(): void {
-    this.battleService.init(this.opponents!);
+    this.startDisabled = true;
+
+    this.battleService.init(this.opponents);
   }
 }

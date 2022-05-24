@@ -19,10 +19,16 @@ export class BattleService {
   constructor(private battleLogService: BattleLogService) {}
 
   init(opponents: Team[]): void {
+    this.resetToDefaults();
+
     this.opponents = opponents;
 
     // Recursive call untill end of game
     this.playNextRound();
+  }
+
+  resetToDefaults(): void {
+    this.rounds = 10;
   }
 
   async playNextRound() {
@@ -64,6 +70,8 @@ export class BattleService {
           : 0;
 
       opponent.hp -= damage;
+
+      if (opponent.hp < 0) opponent.hp = 0;
 
       this.log({
         avatar: champion.avatar,

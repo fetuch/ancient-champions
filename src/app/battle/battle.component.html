@@ -20,7 +20,12 @@
 
     <div class="separator grid justify-center content-center">
         <div *ngIf="opponents[0] && !opponents[1]" class="text-center text-lg text-gray-500">Choosing the opposite team...</div>
-        <button *ngIf="opponents[1]" class="btn" (click)="startTheBattle()">FIGHT!!!</button>
+        <button 
+            *ngIf="opponents[1]" 
+            class="btn" 
+            [disabled]="startDisabled"
+            (click)="startTheBattle()"
+        >FIGHT!!!</button>
     </div>
 
     <div class="team">
