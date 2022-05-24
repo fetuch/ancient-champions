@@ -14,6 +14,7 @@ import { TeamService } from '../team.service';
 })
 export class BattleComponent implements OnInit {
   startDisabled: boolean = false;
+  teamNotFound: boolean = false;
   opponents: Team[] = [];
 
   constructor(
@@ -29,36 +30,42 @@ export class BattleComponent implements OnInit {
   }
 
   prepareBattleStage(): void {
+    this.teamNotFound = false;
     this.startDisabled = false;
     this.battleLogService.clear();
 
     const id = Number(this.route.snapshot.paramMap.get('id'));
 
-    this.teamService.getTeam(id).subscribe((team) => {
-      const opponents = [team];
-      this.opponents = opponents;
+    this.teamService.getTeam(id).subscribe(
+      (team) => {
+        const opponents = [team];
+        this.opponents = opponents;
 
-      this.pantheonService.getPantheons().subscribe((pantheons) => {
-        // get pantheons
-        const availablePantheons = this.battleService.getAvailablePantheons(
-          pantheons,
-          team
-        );
+        this.pantheonService.getPantheons().subscribe((pantheons) => {
+          // get pantheons
+          const availablePantheons = this.battleService.getAvailablePantheons(
+            pantheons,
+            team
+          );
 
-        // pick one of them
-        const randomPantheon =
-          this.battleService.getRandomPantheon(availablePantheons);
+          // pick one of them
+          const randomPantheon =
+            this.battleService.getRandomPantheon(availablePantheons);
 
-        // pick randomly 3 champions and create an opponent team
-        const opponentTeam =
-          this.battleService.createTemporaryTeam(randomPantheon);
+          // pick randomly 3 champions and create an opponent team
+          const opponentTeam =
+            this.battleService.createTemporaryTeam(randomPantheon);
 
-        // simulate
-        setTimeout(() => {
-          this.opponents = [...opponents, opponentTeam];
-        }, 1000);
-      });
-    });
+          // simulate
+          setTimeout(() => {
+            this.opponents = [...opponents, opponentTeam];
+          }, 1000);
+        });
+      },
+      (error) => {
+        if (error.status === 404) this.teamNotFound = true;
+      }
+    );
   }
 
   startTheBattle(): void {
