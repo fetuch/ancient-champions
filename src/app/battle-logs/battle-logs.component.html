@@ -1,6 +1,33 @@
-<div *ngIf="battleLogService.messages.length">
+<div 
+  *ngIf="battleLogService.logs.length"
+  class=""
+>
+  <header class="max-w-3xl mx-auto text-center lg:text-xl font-extrabold text-gray-900 mb-3">
+    {{title}}
+  </header>
 
-    <h2>Battle log</h2>
-    <div *ngFor='let message of battleLogService.messages; index as i'>[{{i+1}}] {{message}}</div>
-  
+  <div class="border border-gray-200 rounded-md p-4 overflow-y-scroll">
+    <ul role="list" class="battle-log divide-y divide-gray-200">
+      <li
+        *ngFor='let log of battleLogService.logs.reverse(); index as i' 
+        class="py-4"
+      >
+        <div class="flex space-x-3">
+          <img 
+            class="h-8 w-8 rounded-full" 
+            src="{{log.avatar ?? '/assets/system-avatar.png'}}"
+            alt=""
+          >
+
+          <div class="flex-1 space-y-1">
+            <div class="flex items-center justify-between">
+              <h3 class="text-sm font-medium">{{log.name ?? 'System'}}</h3>
+              <p class="text-sm text-gray-500">[{{battleLogService.logs.length - i}}]</p>
+            </div>
+            <p class="text-sm text-gray-500">{{log.message}}</p>
+          </div>
+        </div>
+      </li>
+    </ul>
   </div>
+</div>

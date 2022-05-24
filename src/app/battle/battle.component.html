@@ -5,7 +5,7 @@
     </div>
 </div>
 
-<div class=" flex justify-between flex-col lg:flex-row space-y-6 lg:space-y-0 lg:space-x-12">
+<div class="mb-6 flex justify-between flex-col lg:flex-row space-y-6 lg:space-y-0 lg:space-x-12">
     <div class="team">
         <div 
             *ngIf="opponents[0]"
@@ -19,7 +19,7 @@
     </div>
 
     <div class="separator grid justify-center content-center">
-        <div *ngIf="!opponents[1]" class="text-center text-lg text-gray-500">Choosing the opposite team...</div>
+        <div *ngIf="opponents[0] && !opponents[1]" class="text-center text-lg text-gray-500">Choosing the opposite team...</div>
         <button *ngIf="opponents[1]" class="btn" (click)="startTheBattle()">FIGHT!!!</button>
     </div>
 
@@ -34,15 +34,6 @@
             ></app-battle-champion-detail>
         </div>
     </div>
-
-    
-
-    
-
-    
 </div>
 
-<div *ngIf="opponents[1]">
-
-    <app-battle-logs></app-battle-logs>
-</div>
+<app-battle-logs></app-battle-logs>

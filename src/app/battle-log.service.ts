@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
+import { Log } from './log';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BattleLogService {
-  messages: string[] = [];
+  logs: Log[] = [];
 
-  add(message: string) {
-    this.messages.push(message);
+  add(log: Log) {
+    this.logs.push(log);
   }
 }

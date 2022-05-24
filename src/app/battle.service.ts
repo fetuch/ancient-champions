@@ -3,6 +3,7 @@ import { BattleLogService } from './battle-log.service';
 import { Champion } from './champion';
 import { Pantheon } from './pantheon';
 import { Team } from './team';
+import { Log } from './log';
 
 @Injectable({
   providedIn: 'root',
@@ -29,7 +30,9 @@ export class BattleService {
     this.rounds--;
 
     if (this.rounds > 0 && this.areTeamsAlive()) {
-      this.log('Next round');
+      this.log({
+        message: 'Next round.',
+      });
       await this.playNextRound();
     } else {
       //exit game
@@ -62,12 +65,16 @@ export class BattleService {
 
       opponent.hp -= damage;
 
-      this.log(
-        `${champion.name} attacks ${opponent.name} for ${damage}dmg (${opponent.defence} negated). `
-      );
+      this.log({
+        avatar: champion.avatar,
+        name: champion.name,
+        message: `${champion.name} attacks ${opponent.name} for ${damage}dmg (${opponent.defence} negated).`,
+      });
 
       if (opponent.hp <= 0) {
-        this.log(`${opponent.name} dies.`);
+        this.log({
+          message: `${opponent.name} dies.`,
+        });
       }
     }
 
@@ -81,7 +88,9 @@ export class BattleService {
     const winningTeam = this.opponents?.find((team) =>
       team.members.some((member) => member.hp > 0)
     );
-    this.log(`Team ${winningTeam?.members[0].pantheon} wins!!!`);
+    this.log({
+      message: `Team ${winningTeam?.members[0].pantheon} wins!!!`,
+    });
   }
 
   /**
@@ -120,7 +129,9 @@ export class BattleService {
       .champions!.sort(() => Math.random() - 0.5)
       .slice(0, 3);
 
-    this.log('Opponent team has been selected.');
+    this.log({
+      message: 'Opponent team has been selected.',
+    });
 
     return { members: team } as Team;
   }
@@ -140,7 +151,7 @@ export class BattleService {
   }
 
   /** Log a BattleService message with the BattleLogService */
-  private log(message: string) {
-    this.battleLogService.add(message);
+  private log(log: Log) {
+    this.battleLogService.add(log);
   }
 }

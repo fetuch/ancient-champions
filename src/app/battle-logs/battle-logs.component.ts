@@ -7,6 +7,8 @@ import { BattleLogService } from '../battle-log.service';
   styleUrls: ['./battle-logs.component.sass'],
 })
 export class BattleLogsComponent implements OnInit {
+  title: string = 'Battle Log';
+
   constructor(public battleLogService: BattleLogService) {}
 
   ngOnInit(): void {}
