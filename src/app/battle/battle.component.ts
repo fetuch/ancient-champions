@@ -12,7 +12,7 @@ import { TeamService } from '../team.service';
   styleUrls: ['./battle.component.sass'],
 })
 export class BattleComponent implements OnInit {
-  opponents?: Team[];
+  opponents: Team[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -29,6 +29,9 @@ export class BattleComponent implements OnInit {
     const id = Number(this.route.snapshot.paramMap.get('id'));
 
     this.teamService.getTeam(id).subscribe((team) => {
+      const opponents = [team];
+      this.opponents = opponents;
+
       this.pantheonService.getPantheons().subscribe((pantheons) => {
         // get pantheons
         const availablePantheons = this.battleService.getAvailablePantheons(
@@ -44,7 +47,10 @@ export class BattleComponent implements OnInit {
         const opponentTeam =
           this.battleService.createTemporaryTeam(randomPantheon);
 
-        this.opponents = [team, opponentTeam];
+        // simulate
+        setTimeout(() => {
+          this.opponents = [...opponents, opponentTeam];
+        }, 1000);
       });
     });
   }

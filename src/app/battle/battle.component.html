@@ -1,28 +1,48 @@
-<div *ngIf="!opponents">The time to strike is now. Choosing the opposite team...</div>
+<div class="mb-6">
+    <div class="max-w-3xl mx-auto text-center">
+      <h1 class="text-3xl font-extrabold text-gray-900">Battle Stage</h1>
+      <p class="mt-4 text-lg text-gray-500">The time to strike is now.</p>
+    </div>
+</div>
 
-<div *ngIf="opponents">
-
-    <div class="stage">
-        <div class="team">
+<div class=" flex justify-between flex-col lg:flex-row space-y-6 lg:space-y-0 lg:space-x-12">
+    <div class="team">
+        <div 
+            *ngIf="opponents[0]"
+            class="flex lg:flex-col"
+        >
             <app-battle-champion-detail
                 *ngFor="let champion of opponents[0].members"
                 [champion]="champion"
             ></app-battle-champion-detail>
         </div>
+    </div>
 
-        <div>
-            <div style="margin: 1em 0;">
-                <button (click)="startTheBattle()">FIGHT!!!</button>
-            </div>
-            
-            <app-battle-logs></app-battle-logs>
-        </div>
-        
-        <div class="team">
+    <div class="separator grid justify-center content-center">
+        <div *ngIf="!opponents[1]" class="text-center text-lg text-gray-500">Choosing the opposite team...</div>
+        <button *ngIf="opponents[1]" class="btn" (click)="startTheBattle()">FIGHT!!!</button>
+    </div>
+
+    <div class="team">
+        <div 
+            *ngIf="opponents[1]"
+            class="flex lg:flex-col"
+        >
             <app-battle-champion-detail
                 *ngFor="let champion of opponents[1].members"
                 [champion]="champion"
             ></app-battle-champion-detail>
         </div>
     </div>
+
+    
+
+    
+
+    
+</div>
+
+<div *ngIf="opponents[1]">
+
+    <app-battle-logs></app-battle-logs>
 </div>
