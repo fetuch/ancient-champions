@@ -30,9 +30,10 @@ export class PantheonComponent implements OnInit {
   getPantheon(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
 
-    this.pantheonService
-      .getPantheon(id)
-      .subscribe((pantheon) => (this.pantheon = pantheon));
+    this.pantheonService.getPantheon(id).subscribe((pantheon) => {
+      this.pantheon = pantheon;
+      console.log({ pantheon });
+    });
   }
 
   toggleSelectedChampion(champion: Champion): void {

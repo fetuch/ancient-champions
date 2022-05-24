@@ -18,8 +18,13 @@ export class PantheonsComponent implements OnInit {
   }
 
   getPantheons(): void {
-    this.pantheonService
-      .getPantheons()
-      .subscribe((pantheons) => (this.pantheons = pantheons));
+    this.pantheonService.getPantheons().subscribe((pantheons) => {
+      pantheons.forEach((pantheon) => {
+        pantheon.champions = pantheon.champions
+          ?.sort((a, b) => Math.random() - 0.5)
+          .slice(0, 6);
+      });
+      this.pantheons = pantheons;
+    });
   }
 }

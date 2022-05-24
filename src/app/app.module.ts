@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
@@ -17,6 +18,7 @@ import { ChampionDetailComponent } from './champion-detail/champion-detail.compo
 import { HomepageComponent } from './homepage/homepage.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { FeatureListComponent } from './feature-list/feature-list.component';
+import { ChampionFormComponent } from './champion-form/champion-form.component';
 
 @NgModule({
   declarations: [
@@ -31,9 +33,11 @@ import { FeatureListComponent } from './feature-list/feature-list.component';
     HomepageComponent,
     NavigationComponent,
     FeatureListComponent,
+    ChampionFormComponent,
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     HttpClientModule,
     HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {

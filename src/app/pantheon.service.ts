@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 
 import { Pantheon } from './pantheon';
@@ -10,6 +10,10 @@ import { Observable, of } from 'rxjs';
 })
 export class PantheonService {
   private pantheonsUrl = 'api/pantheons';
+
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+  };
 
   constructor(private http: HttpClient) {}
 
@@ -24,6 +28,13 @@ export class PantheonService {
     return this.http
       .get<Pantheon>(url)
       .pipe(catchError(this.handleError<Pantheon>(`getPantheon id=${id}`)));
+  }
+
+  /** PUT: update the pantheon on the server */
+  updatePantheon(pantheon: Pantheon): Observable<any> {
+    return this.http
+      .put(this.pantheonsUrl, pantheon, this.httpOptions)
+      .pipe(catchError(this.handleError<any>('updatePantheon')));
   }
 
   /**

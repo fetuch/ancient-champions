@@ -32,7 +32,11 @@ export class InMemoryDataService implements InMemoryDbService {
     return { pantheons, teams, champions };
   }
 
-  genId(teams: Team[]): number {
-    return teams.length > 0 ? Math.max(...teams.map((team) => team.id)) + 1 : 1;
+  // genId(teams: Team[]): number {
+  //   return teams.length > 0 ? Math.max(...teams.map((team) => team.id)) + 1 : 1;
+  // }
+
+  genId<T extends Team | Champion>(myTable: T[]): number {
+    return myTable.length > 0 ? Math.max(...myTable.map((t) => t.id)) + 1 : 31;
   }
 }
