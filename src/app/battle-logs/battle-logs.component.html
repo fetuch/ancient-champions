@@ -9,7 +9,7 @@
   <div class="border border-gray-200 rounded-md p-4 overflow-y-scroll">
     <ul role="list" class="battle-log divide-y divide-gray-200">
       <li
-        *ngFor='let log of battleLogService.logs.reverse(); index as i' 
+        *ngFor='let log of battleLogService.logs; index as i' 
         class="py-4"
       >
         <div class="flex space-x-3">
@@ -22,7 +22,7 @@
           <div class="flex-1 space-y-1">
             <div class="flex items-center justify-between">
               <h3 class="text-sm font-medium">{{log.name ?? 'System'}}</h3>
-              <p class="text-sm text-gray-500">[{{battleLogService.logs.length - i}}]</p>
+              <p class="text-sm text-gray-500">[{{i+1}}]</p>
             </div>
             <p class="text-sm text-gray-500">{{log.message}}</p>
           </div>
