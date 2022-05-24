@@ -1,1 +1,39 @@
-<p>homepage works!</p>
+<div class="space-y-10 lg:space-y-20">
+    <div class="lg:grid lg:grid-cols-12 lg:gap-8">
+      <div class="space-y-3 text-left sm:text-center md:max-w-2xl md:mx-auto lg:col-span-6 lg:text-left">
+        <h1 class="mt-1 block text-4xl tracking-tight font-extrabold sm:text-5xl xl:text-6xl text-gray-900">
+          {{title}}
+        </h1>
+
+        <p class="text-base text-gray-500 sm:mt-5 text-xl lg:text-lg xl:text-xl">
+          Angular based, portfolio front-end project.
+        </p>
+      </div>
+
+      <div class="mt-12 relative sm:max-w-lg sm:mx-auto lg:mt-0 lg:max-w-none lg:mx-0 lg:col-span-6 lg:flex lg:items-center">
+        <div class="relative mx-auto w-full rounded-lg shadow-lg lg:max-w-md">
+          <video class="rounded-lg" controls preload="auto">
+            <source src="{{preview}}" type='video/mp4'>
+          </video>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <app-feature-list></app-feature-list>
+    </div>
+
+    <!-- This example requires Tailwind CSS v2.0+ -->
+    <div class="text-center">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-3xl font-extrabold text-gray-900">Ready to dive in?</h2>
+        <p class="text-3xl mt-4 text-lg text-gray-500">Pick your team and start a game.</p>
+      </div>
+
+      <div class="mt-8 flex justify-center">
+        <div class="inline-flex rounded-md shadow">
+          <a routerLink="/pantheons" class="btn"> Get started </a>
+        </div>
+      </div>
+    </div>
+  </div>

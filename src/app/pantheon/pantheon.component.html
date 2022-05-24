@@ -1,27 +1,36 @@
 <div *ngIf="pantheon">
-    <h1 class="title">{{pantheon.name}}</h1>
-
-    <p class="hint">Pick three champions</p>
-
-    <ul class="champions">
-        <li *ngFor="let champion of pantheon.champions">
+    <div class="">
+        <div class="max-w-3xl mx-auto text-center">
+          <h1 class="text-3xl font-extrabold text-gray-900">{{pantheon.name}} Pantheon</h1>
+          <p class="mt-4 text-lg text-gray-500">Gather together for the glory and the might. Pick three of those champions and attack.</p>
+        </div>
+    
+        <ul class="mt-6 space-y-6 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:gap-y-6 md:grid-cols-3">
+          <li *ngFor="let champion of pantheon.champions">
             <app-champion-detail 
                 [champion]="champion" 
                 [selected]="selectedChampions.includes(champion)"
                 [banner]="pantheon.banner"
                 (itemEvent)="toggleSelectedChampion($event)"
             ></app-champion-detail>
-        </li>
-    </ul>
+          </li>
+        </ul>
+    </div>
 
-    <div>
-        <p class="hint">
+    <div class="flex space-x-3 fixed lg:static bottom-0 bg-white border-t lg:border-none border-gray-200 w-full -mx-4 sm:-mx-6 lg:mx-0 p-4 lg:p-0 lg:mt-12">
+        <div class="flex-1 lg:text-xl self-center">
             Your team: 
-            <span *ngFor="let champion of selectedChampions">
+            <span 
+              *ngFor="let champion of selectedChampions"
+            >
                 {{champion.name}}
             </span>
-        </p>
+          </div>
 
-        <button (click)="confirmTheTeamSquad()" [disabled]="selectedChampions.length !== requiredChampions">Confirm</button>
+        <button 
+          class="btn self-center"
+          (click)="confirmTheTeamSquad()" 
+          [disabled]="selectedChampions.length !== requiredChampions"
+        >Confirm</button>
     </div>
 </div>

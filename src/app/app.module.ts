@@ -16,6 +16,7 @@ import { BattleChampionDetailComponent } from './battle-champion-detail/battle-c
 import { ChampionDetailComponent } from './champion-detail/champion-detail.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { NavigationComponent } from './navigation/navigation.component';
+import { FeatureListComponent } from './feature-list/feature-list.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { NavigationComponent } from './navigation/navigation.component';
     ChampionDetailComponent,
     HomepageComponent,
     NavigationComponent,
+    FeatureListComponent,
   ],
   imports: [
     BrowserModule,
