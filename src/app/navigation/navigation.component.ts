@@ -18,7 +18,7 @@ interface menuItem {
   styleUrls: ['./navigation.component.sass'],
 })
 export class NavigationComponent implements OnInit {
-  menuOppened: boolean = true;
+  menuOppened: boolean = false;
   menuItems: menuItem[] = [
     {
       link: '/',
