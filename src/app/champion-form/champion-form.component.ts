@@ -118,11 +118,11 @@ export class ChampionFormComponent implements OnInit {
       );
 
       if (pantheon) {
-        const index = pantheon.champions?.findIndex(
+        const index = pantheon.champions!.findIndex(
           (champion) => champion.id === this.model.id
         );
 
-        if (index) {
+        if (index !== -1) {
           pantheon.champions![index] = this.model;
         }
 

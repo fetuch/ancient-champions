@@ -32,7 +32,6 @@ export class PantheonComponent implements OnInit {
 
     this.pantheonService.getPantheon(id).subscribe((pantheon) => {
       this.pantheon = pantheon;
-      console.log({ pantheon });
     });
   }
 
