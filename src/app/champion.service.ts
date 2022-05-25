@@ -19,6 +19,12 @@ export class ChampionService {
     return this.http.get<Champion[]>(this.championsUrl);
   }
 
+  getChampion(id: number): Observable<Champion> {
+    const url = `${this.championsUrl}/${id}`;
+
+    return this.http.get<Champion>(url);
+  }
+
   /** POST: add a new champion to the server */
   addChampion(champion: Champion): Observable<Champion> {
     return this.http.post<Champion>(
@@ -26,5 +32,10 @@ export class ChampionService {
       champion,
       this.httpOptions
     );
+  }
+
+  /** PUT: update the champion on the server */
+  updateChampion(champion: Champion): Observable<any> {
+    return this.http.put(this.championsUrl, champion, this.httpOptions);
   }
 }

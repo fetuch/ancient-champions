@@ -1,6 +1,5 @@
 <div
     *ngIf="champion"
-    (click)="toggleSelectedChampion()"
     [class.selected]="selected"
     class="champion"
 >
@@ -18,5 +17,22 @@
     <div class="champion__stats">
         <span>Attack: {{champion?.attack}}</span>
         <span>Defence: {{champion?.defence}}</span>
+    </div>
+
+    <div class="actions border-t border-gray-300">
+        <div class="relative flex justify-around">
+            <button type="button" class="px-5 py-3 inline-flex justify-center items-center text-sm font-medium text-gray-700 hover:bg-gray-200">Delete</button>
+            
+            <a routerLink="/champions/{{champion.id}}/edit" class="px-5 py-3 inline-flex justify-center items-center text-sm font-medium text-gray-700 hover:bg-gray-200">Edit</a>
+            
+            <button 
+                type="button" 
+                class="px-5 py-3 inline-flex justify-center items-center text-sm font-medium text-gray-700 hover:bg-gray-200"
+                (click)="toggleSelectedChampion()"
+            >
+                <span *ngIf="!selected">Add to taem</span>
+                <span *ngIf="selected">Remove from taem</span>
+            </button>
+        </div>
     </div>
 </div>

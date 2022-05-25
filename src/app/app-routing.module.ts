@@ -11,7 +11,8 @@ const routes: Routes = [
   { path: 'pantheons', component: PantheonsComponent },
   { path: 'pantheons/:id', component: PantheonComponent },
   { path: 'battle/:id', component: BattleComponent },
-  { path: 'create-champion', component: ChampionFormComponent },
+  { path: 'champions/create', component: ChampionFormComponent },
+  { path: 'champions/:id/edit', component: ChampionFormComponent },
 ];
 
 @NgModule({

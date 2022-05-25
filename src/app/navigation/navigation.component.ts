@@ -31,7 +31,7 @@ export class NavigationComponent implements OnInit {
       exact: false,
     },
     {
-      link: '/create-champion',
+      link: '/champions/create',
       name: 'Create Champion',
       exact: false,
     },

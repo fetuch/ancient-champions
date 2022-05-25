@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { Champion } from '../champion';
 import { ChampionService } from '../champion.service';
@@ -14,6 +14,8 @@ import { PantheonService } from '../pantheon.service';
 })
 export class ChampionFormComponent implements OnInit {
   pantheons?: Pantheon[];
+  champion?: Champion;
+
   model = {
     hp: baseHP,
     attack: baseAttack,
@@ -22,7 +24,6 @@ export class ChampionFormComponent implements OnInit {
 
   images: string[] = [
     `${baseImgUrl}/avatar-1.jpg`,
-    `${baseImgUrl}/avatar-2.jpg`,
     `${baseImgUrl}/avatar-3.jpg`,
     `${baseImgUrl}/avatar-4.jpg`,
     `${baseImgUrl}/avatar-5.jpg`,
@@ -32,17 +33,37 @@ export class ChampionFormComponent implements OnInit {
   minHp: number = baseHP;
   minAttack: number = baseAttack;
   minDefence: number = baseDefence;
-  additionalPoints: number = 8;
-  freePoints: number = 8;
+  additionalPoints: number = 10;
+  freePoints: number = 10;
 
   constructor(
+    private route: ActivatedRoute,
     private router: Router,
     private pantheonService: PantheonService,
     private championService: ChampionService
   ) {}
 
   ngOnInit(): void {
+    this.getChampion();
     this.getPantheons();
+  }
+
+  getChampion() {
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+
+    if (id) {
+      this.championService.getChampion(id).subscribe((champion) => {
+        this.champion = champion;
+
+        this.model = champion;
+
+        if (!this.images.includes(champion.avatar)) {
+          this.images = [...this.images, champion.avatar];
+        }
+
+        this.onStatChange();
+      });
+    }
   }
 
   getPantheons(): void {
@@ -52,7 +73,29 @@ export class ChampionFormComponent implements OnInit {
   }
 
   onSubmit() {
+    if (this.champion) {
+      this.updateChampion();
+    } else {
+      this.saveChampion();
+    }
+  }
+
+  onStatChange() {
+    this.freePoints =
+      this.minHp +
+      this.minAttack +
+      this.minDefence +
+      this.additionalPoints -
+      (this.model.hp + this.model.attack + this.model.defence);
+  }
+
+  onSelectAvatar(avatar: string): void {
+    this.model.avatar = avatar;
+  }
+
+  saveChampion() {
     this.championService.addChampion(this.model).subscribe((champion) => {
+      //update champion's pantheon list of champions
       const pantheon = this.pantheons?.find(
         (pantheon) => pantheon.name === champion.pantheon
       );
@@ -67,16 +110,26 @@ export class ChampionFormComponent implements OnInit {
     });
   }
 
-  onStatChange() {
-    this.freePoints =
-      this.minHp +
-      this.minAttack +
-      this.minDefence +
-      this.additionalPoints -
-      (this.model.hp + this.model.attack + this.model.defence);
-  }
+  updateChampion() {
+    this.championService.updateChampion(this.model).subscribe(() => {
+      //update champion's pantheon list of champions
+      const pantheon = this.pantheons?.find(
+        (pantheon) => pantheon.name === this.model.pantheon
+      );
 
-  onSelectAvatar(avatar: string): void {
-    this.model.avatar = avatar;
+      if (pantheon) {
+        const index = pantheon.champions?.findIndex(
+          (champion) => champion.id === this.model.id
+        );
+
+        if (index) {
+          pantheon.champions![index] = this.model;
+        }
+
+        this.pantheonService.updatePantheon(pantheon).subscribe(() => {
+          this.router.navigate([`/pantheons/${pantheon.id}`]);
+        });
+      }
+    });
   }
 }
