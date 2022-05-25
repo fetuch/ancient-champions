@@ -38,4 +38,11 @@ export class ChampionService {
   updateChampion(champion: Champion): Observable<any> {
     return this.http.put(this.championsUrl, champion, this.httpOptions);
   }
+
+  /** DELETE: delete the champion from the server */
+  deleteChampion(id: number): Observable<Champion> {
+    const url = `${this.championsUrl}/${id}`;
+
+    return this.http.delete<Champion>(url, this.httpOptions);
+  }
 }

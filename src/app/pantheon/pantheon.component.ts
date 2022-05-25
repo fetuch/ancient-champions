@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Champion } from '../champion';
+import { ChampionService } from '../champion.service';
 import { Pantheon } from '../pantheon';
 import { PantheonService } from '../pantheon.service';
 import { Team } from '../team';
@@ -13,14 +14,17 @@ import { TeamService } from '../team.service';
 })
 export class PantheonComponent implements OnInit {
   pantheon?: Pantheon;
+  champion?: Champion;
   selectedChampions: Champion[] = [];
   requiredChampions: number = 3;
+  showDeleteModal: boolean = false;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private pantheonService: PantheonService,
-    private teamService: TeamService
+    private teamService: TeamService,
+    private championService: ChampionService
   ) {}
 
   ngOnInit(): void {
@@ -63,5 +67,23 @@ export class PantheonComponent implements OnInit {
     this.teamService.registerTeam({ members } as Team).subscribe((team) => {
       this.router.navigate([`/battle/${team.id}`]);
     });
+  }
+
+  showDeleteConfirmation(champion: Champion): void {
+    this.champion = champion;
+
+    this.showDeleteModal = true;
+  }
+
+  confirmDelete(): void {
+    this.showDeleteModal = false;
+
+    this.pantheon!.champions = this.pantheon?.champions?.filter(
+      (champion) => champion.id !== this.champion?.id
+    );
+
+    this.championService.deleteChampion(this.champion!.id).subscribe();
+
+    this.pantheonService.updatePantheon(this.pantheon!).subscribe();
   }
 }
