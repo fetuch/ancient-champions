@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 import { Champion } from '../champion';
 import { ChampionService } from '../champion.service';
@@ -39,6 +40,7 @@ export class ChampionFormComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
+    private location: Location,
     private pantheonService: PantheonService,
     private championService: ChampionService
   ) {}
@@ -104,7 +106,7 @@ export class ChampionFormComponent implements OnInit {
         pantheon.champions?.push(champion);
 
         this.pantheonService.updatePantheon(pantheon).subscribe(() => {
-          this.router.navigate([`/pantheons/${pantheon.id}`]);
+          this.goBack();
         });
       }
     });
@@ -127,9 +129,13 @@ export class ChampionFormComponent implements OnInit {
         }
 
         this.pantheonService.updatePantheon(pantheon).subscribe(() => {
-          this.router.navigate([`/pantheons/${pantheon.id}`]);
+          this.goBack();
         });
       }
     });
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 }

@@ -22,7 +22,7 @@
           <div class="flex-1 space-y-1">
             <div class="flex items-center justify-between">
               <h3 class="text-sm font-medium">{{log.name ?? 'System'}}</h3>
-              <p class="text-sm text-gray-500">[{{i+1}}]</p>
+              <p class="text-sm text-gray-500">[{{battleLogService.logs.length - i}}]</p>
             </div>
             <p class="text-sm text-gray-500">{{log.message}}</p>
           </div>

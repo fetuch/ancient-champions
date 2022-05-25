@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+
 import { Champion } from '../champion';
 import { ChampionService } from '../champion.service';
 
@@ -11,11 +14,25 @@ export class ChampionsComponent implements OnInit {
   champions?: Champion[];
   sortColumn: string = 'name';
   sortDir: boolean = true;
+  private searchTerms = new Subject<string>();
 
   constructor(private championService: ChampionService) {}
 
   ngOnInit(): void {
     this.getChampions();
+
+    this.searchTerms
+      .pipe(
+        // wait 300ms after each keystroke before considering the term
+        debounceTime(300),
+
+        // ignore new term if same as previous term
+        distinctUntilChanged(),
+
+        // switch to new search observable each time the term changes
+        switchMap((term: string) => this.championService.searchChampions(term))
+      )
+      .subscribe((champions) => (this.champions = champions));
   }
 
   getChampions(): void {
@@ -50,5 +67,9 @@ export class ChampionsComponent implements OnInit {
     this.sortColumn = column;
 
     this.sortChampions();
+  }
+
+  search(term: string): void {
+    this.searchTerms.next(term);
   }
 }
