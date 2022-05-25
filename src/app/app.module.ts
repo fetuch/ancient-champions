@@ -19,6 +19,7 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { FeatureListComponent } from './feature-list/feature-list.component';
 import { ChampionFormComponent } from './champion-form/champion-form.component';
+import { ChampionsComponent } from './champions/champions.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { ChampionFormComponent } from './champion-form/champion-form.component';
     NavigationComponent,
     FeatureListComponent,
     ChampionFormComponent,
+    ChampionsComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,63 @@
+<div class="">
+    <div class="sm:flex sm:items-center">
+        <div class="">
+            <h1 class="text-3xl font-extrabold text-gray-900">Champions</h1>
+            <p class="mt-4 text-lg text-gray-500">A list of all the champions including their name, avatar, stats and pantheon.</p>
+        </div>
+
+        <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
+            <a routerLink="/champions/create" class="btn">Add Champion</a>
+        </div>
+    </div>
+
+    <div class="mt-12 shadow ring-1 ring-black ring-opacity-5 md:rounded-sm">
+        <table class="min-w-full divide-y divide-gray-300 text-sm">
+            <thead class="bg-gray-50 text-gray-900">
+                <tr>
+                    <th class="px-3 py-2 text-left" (click)="sort('name')">Name</th>
+                    <th class="px-3 py-2 text-left hidden lg:table-cell" (click)="sort('hp')">Hit points</th>
+                    <th class="px-3 py-2 text-left hidden lg:table-cell" (click)="sort('attack')">Attack</th>
+                    <th class="px-3 py-2 text-left hidden lg:table-cell" (click)="sort('defence')">Defence</th>
+                    <th class="px-3 py-2 text-left hidden md:table-cell" (click)="sort('pantheon')">Pantheon</th>
+                    <th class="px-3 py-2 text-left"><span class="sr-only">Manage</span></th>
+                </tr>
+            </thead>
+
+            <tbody class="divide-y divide-gray-300">
+                <tr *ngFor="let champion of champions">
+                    <td>
+                        <div class="flex items-start lg:items-center p-3">
+                            <div class="h-10 w-10 flex-shrink-0">
+                                <img class="h-10 w-10 rounded-full" src="{{champion.avatar}}" alt="{{champion.name}}">
+                            </div>
+
+                            <div class="ml-4">
+                                <div class="font-medium text-gray-900">{{champion.name}}</div>
+                                <div class="md:hidden text-gray-500">{{champion.pantheon}}</div>
+
+                                <div class="lg:hidden mt-1 flex space-x-3 text-gray-500">
+                                    <div>HP: {{champion.hp}}</div>
+                                    <div>Attack: {{champion.attack}}</div>
+                                    <div>Defence: {{champion.defence}}</div>
+                                </div>    
+                            </div>
+                        </div>                                         
+                    </td>
+
+                    <td class="hidden lg:table-cell p-4">{{champion.hp}}</td>
+
+                    <td class="hidden lg:table-cell p-4">{{champion.attack}}</td>
+
+                    <td class="hidden lg:table-cell p-4">{{champion.defence}}</td>
+
+                    <td class="hidden md:table-cell p-4">{{champion.pantheon}}</td>
+
+                    <td class="p-4">
+                        <a routerLink="/champions/{{champion.id}}/edit" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
