@@ -8,7 +8,7 @@ export class BattleLogService {
   logs: Log[] = [];
 
   add(log: Log) {
-    this.logs.push(log);
+    this.logs.unshift(log);
   }
 
   clear(): void {

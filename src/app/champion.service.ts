@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Champion } from './champion';
 
 @Injectable({
@@ -44,5 +44,14 @@ export class ChampionService {
     const url = `${this.championsUrl}/${id}`;
 
     return this.http.delete<Champion>(url, this.httpOptions);
+  }
+
+  /* GET champions whose name contains search term */
+  searchChampions(term: string): Observable<Champion[]> {
+    if (!term.trim()) {
+      // if not search term, return empty champion array.
+      return of([]);
+    }
+    return this.http.get<Champion[]>(`${this.championsUrl}/?name=${term}`);
   }
 }
