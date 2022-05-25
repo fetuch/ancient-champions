@@ -48,7 +48,10 @@
             </div>
     
             <div class="sm:col-span-2">
-              <label for="hp" class="form-label"> Hit points </label>
+                <div class="flex justify-between">
+                    <label for="hp" class="form-label"> Hit points </label>
+                    <span class="text-sm text-gray-500">Min: {{minHp}}</span>
+                </div>
               <div class="mt-1">
                 <input 
                     type="number"
@@ -63,12 +66,19 @@
                     [(ngModel)]="model.hp"
                     (ngModelChange)="onStatChange()"
                 >
-              </div>
-              <p [hidden]="hp.valid || attack.pristine" class="form-error">Hit points field is required</p>
+                </div>
+                <div *ngIf="hp.errors && (hp.dirty || hp.touched)" class="form-error">
+                    <span *ngIf="hp.errors['required']">Hp is required</span>
+                    <span *ngIf="hp.errors['min']">Hp cannot be lower than {{minHp}}</span>
+                    <span *ngIf="hp.errors['max']">Hp cannot be greater than {{model.hp + freePoints}}</span>
+                </div>
             </div>
     
             <div class="sm:col-span-2">
-                <label for="attack" class="form-label"> Attack power </label>
+                <div class="flex justify-between">
+                    <label for="attack" class="form-label"> Attack power </label>
+                    <span class="text-sm text-gray-500">Min: {{minAttack}}</span>
+                </div>
                 <div class="mt-1">
                   <input 
                       type="number"
@@ -84,11 +94,18 @@
                       (ngModelChange)="onStatChange()"
                   >
                 </div>
-                <p [hidden]="attack.valid || attack.pristine" class="form-error">Attack power field is required</p>
+                <div *ngIf="attack.errors && (attack.dirty || attack.touched)" class="form-error">
+                    <span *ngIf="attack.errors['required']">Attack is required</span>
+                    <span *ngIf="attack.errors['min']">Attack cannot be lower than {{minAttack}}</span>
+                    <span *ngIf="attack.errors['max']">Attack cannot be greater than {{model.attack + freePoints}}</span>
+                </div>
             </div>
 
             <div class="sm:col-span-2">
-                <label for="defence" class="form-label"> Defence </label>
+                <div class="flex justify-between">
+                    <label for="defence" class="form-label"> Defence </label>
+                    <span class="text-sm text-gray-500">Min: {{minDefence}}</span>
+                </div>
                 <div class="mt-1">
                   <input 
                       type="number" 
@@ -104,20 +121,32 @@
                       (ngModelChange)="onStatChange()"
                   >
                 </div>
-                <p [hidden]="defence.valid || defence.pristine" class="form-error">Defence field is required</p>
+                <div *ngIf="defence.errors && (defence.dirty || defence.touched)" class="form-error">
+                    <span *ngIf="defence.errors['required']">Defence is required</span>
+                    <span *ngIf="defence.errors['min']">Defence cannot be lower than {{minDefence}}</span>
+                    <span *ngIf="defence.errors['max']">Defence cannot be greater than {{model.defence + freePoints}}</span>
+                </div>
             </div>  
 
             <div class="sm:col-span-2">
-                <label for="points" class="form-label"> Free points </label>
+                <div class="flex justify-between">
+                    <label for="points" class="form-label"> Free points </label>
+                    <span class="text-sm text-gray-500">Readonly</span>
+                </div>
                 <div class="mt-1">
                   <input 
                       type="number" 
+                      min="0"
                       name="points" 
                       id="points" 
                       class="form-input"
-                      disabled
-                      value="{{freePoints}}"
+                      readonly
+                      #points="ngModel"
+                      [(ngModel)]="freePoints"
                   >
+                </div>
+                <div *ngIf="points.errors" class="form-error">
+                    <span *ngIf="points.errors['min']">Free points cannot be lower than 0</span>
                 </div>
             </div>  
         </div>
@@ -146,6 +175,7 @@
                         alt=""
                         class="avatar"
                         [class.refused]="model.avatar && model.avatar !== avatar"
+                        [class.selected]="model.avatar === avatar"
                         (click)="onSelectAvatar(avatar)"
                     >
                 </div>

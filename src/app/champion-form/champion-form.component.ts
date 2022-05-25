@@ -21,9 +21,12 @@ export class ChampionFormComponent implements OnInit {
   } as Champion;
 
   images: string[] = [
-    `${baseImgUrl}/poseidon.jpg`,
-    `${baseImgUrl}/hephaestus.jpg`,
-    `${baseImgUrl}/ganesha.jpg`,
+    `${baseImgUrl}/avatar-1.jpg`,
+    `${baseImgUrl}/avatar-2.jpg`,
+    `${baseImgUrl}/avatar-3.jpg`,
+    `${baseImgUrl}/avatar-4.jpg`,
+    `${baseImgUrl}/avatar-5.jpg`,
+    `${baseImgUrl}/avatar-6.jpg`,
   ];
 
   minHp: number = baseHP;
