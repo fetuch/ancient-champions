@@ -4,7 +4,10 @@
 >
     <img [class.dead]="champion.hp <=0" src="{{champion.avatar}}" alt="">
 
-    <div class="champion__name"><span>{{champion.name}}</span></div>
+    <div class="champion__name">
+        <span>{{champion.name.substring(0, 10)}}</span>
+        <span *ngIf="champion.name.length > 10">...</span>
+    </div>
 
     <div class="champion__stats">
         <div class="champion__stat champion__stat--hp"><span class="material-icons">favorite</span> {{champion.hp}}</div>

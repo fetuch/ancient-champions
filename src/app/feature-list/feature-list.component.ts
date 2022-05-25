@@ -39,8 +39,7 @@ export class FeatureListComponent implements OnInit {
     },
     {
       name: 'Forms',
-      description:
-        'Tempor tellus in aliquet eu et sit nulla tellus. Suspendisse est, molestie blandit quis ac. Lacus.',
+      description: 'Template-driven form used to create and update Champions.',
     },
     {
       name: 'Stats & charts',
