@@ -48,10 +48,8 @@ export class ChampionService {
 
   /* GET champions whose name contains search term */
   searchChampions(term: string): Observable<Champion[]> {
-    if (!term.trim()) {
-      // if not search term, return empty champion array.
-      return of([]);
-    }
-    return this.http.get<Champion[]>(`${this.championsUrl}/?name=${term}`);
+    return this.http.get<Champion[]>(
+      `${this.championsUrl}/?name=${term.trim()}`
+    );
   }
 }

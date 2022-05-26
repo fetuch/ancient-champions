@@ -42,9 +42,8 @@ export class FeatureListComponent implements OnInit {
       description: 'Template-driven form used to create and update Champions.',
     },
     {
-      name: 'Stats & charts',
-      description:
-        'Tempor tellus in aliquet eu et sit nulla tellus. Suspendisse est, molestie blandit quis ac. Lacus.',
+      name: 'Datatables',
+      description: 'Sortable and searchable datatable',
     },
     {
       name: 'Need one more',
