@@ -11,7 +11,12 @@
                   </svg>
                 </div>
 
-                <input #searchBox id="search-box" (input)="search(searchBox.value)" class="block w-full bg-white py-2 pl-10 pr-3 border border-gray-300 rounded-md text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-600 focus:ring-white focus:border-white sm:text-sm" placeholder="Search champion" type="search" name="search">
+                <input 
+                    #searchBox 
+                    autocomplete="search-champions"
+                    (input)="search(searchBox.value)" 
+                    class="block w-full bg-white py-2 pl-10 pr-3 border border-gray-300 rounded-md text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-600 focus:ring-white focus:border-white sm:text-sm" 
+                    placeholder="Search champion" type="search" name="search">
             </div>
         </div>
 

@@ -91,6 +91,18 @@ export class ChampionFormComponent implements OnInit {
       (this.model.hp + this.model.attack + this.model.defence);
   }
 
+  increaseStat(stat: string) {
+    this.model[stat as keyof Champion]++;
+
+    this.onStatChange();
+  }
+
+  decreaseStat(stat: string) {
+    this.model[stat as keyof Champion]--;
+
+    this.onStatChange();
+  }
+
   onSelectAvatar(avatar: string): void {
     this.model.avatar = avatar;
   }

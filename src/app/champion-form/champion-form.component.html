@@ -11,9 +11,9 @@
         class="space-y-6" 
         (ngSubmit)="onSubmit()" 
     >
-        <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-8">
-            <div class="sm:col-span-4">
-                <label for="pantheon" class="form-label">Pantheon</label>
+        <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+            <div class="sm:col-span-3">
+                <label for="pantheon" class="form-label">Pantheon <sup class="text-red-600">*</sup></label>
                 <div class="mt-1">
                     <select 
                         id="pantheon" 
@@ -30,8 +30,8 @@
                 </div>
             </div>
 
-            <div class="sm:col-span-4">
-              <label for="name" class="form-label">Champion name</label>
+            <div class="sm:col-span-3">
+              <label for="name" class="form-label">Champion name <sup class="text-red-600">*</sup></label>
               <div class="mt-1">
                 <input 
                     type="text" 
@@ -47,113 +47,174 @@
               <p [hidden]="name.valid || name.pristine" class="form-error">Name is required</p>
             </div>
     
-            <div class="sm:col-span-2">
+            <div class="sm:col-span-2 border border-gray-300 rounded-md p-3">
                 <div class="flex justify-between">
                     <label for="hp" class="form-label"> Hit points </label>
-                    <span class="text-sm text-gray-500">Min: {{minHp}}</span>
+                    <span class="text-sm text-gray-500">Min: {{minHp}}, Available: {{freePoints}}</span>
                 </div>
-              <div class="mt-1">
-                <input 
-                    type="number"
-                    min="{{minHp}}"
-                    max="{{model.hp + freePoints}}"
-                    name="hp"
-                    id="hp" 
-                    autocomplete="champion-hp" 
-                    class="form-input"
-                    required
-                    #hp="ngModel"
-                    [(ngModel)]="model.hp"
-                    (ngModelChange)="onStatChange()"
-                >
+
+                <div class="mt-1">
+                    <input 
+                        type="number"
+                        min="{{minHp}}"
+                        max="{{model.hp + freePoints}}"
+                        name="hp"
+                        autocomplete="champion-hp" 
+                        class="hidden"
+                        readonly
+                        #hp="ngModel"
+                        [(ngModel)]="model.hp"
+                        (ngModelChange)="onStatChange()"
+                    >
                 </div>
-                <div *ngIf="hp.errors && (hp.dirty || hp.touched)" class="form-error">
+
+                <div class="mt-3 flex justify-between">
+                    <strong class="self-center">{{model.hp}}</strong>
+
+                    <div class="space-x-6">
+                        <button 
+                            (click)="decreaseStat('hp')"
+                            type="button" 
+                            class="stats-btn"
+                            [disabled]="model.hp <= minHp"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M18 12H6" />
+                            </svg>
+                        </button>
+
+                        <button 
+                            (click)="increaseStat('hp')"
+                            type="button" 
+                            class="stats-btn"
+                            [disabled]="freePoints <= 0"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div *ngIf="hp.errors" class="form-error">
                     <span *ngIf="hp.errors['required']">Hp is required</span>
                     <span *ngIf="hp.errors['min']">Hp cannot be lower than {{minHp}}</span>
                     <span *ngIf="hp.errors['max']">Hp cannot be greater than {{model.hp + freePoints}}</span>
                 </div>
             </div>
     
-            <div class="sm:col-span-2">
+            <div class="sm:col-span-2 border border-gray-300 rounded-md p-3">
                 <div class="flex justify-between">
                     <label for="attack" class="form-label"> Attack power </label>
-                    <span class="text-sm text-gray-500">Min: {{minAttack}}</span>
+                    <span class="text-sm text-gray-500">Min: {{minAttack}}, Available: {{freePoints}}</span>
                 </div>
                 <div class="mt-1">
-                  <input 
-                      type="number"
-                      min="{{minAttack}}"
-                      max="{{model.attack + freePoints}}"
-                      name="attack" 
-                      id="attack" 
-                      autocomplete="champion-attack" 
-                      class="form-input"
-                      required
-                      #attack="ngModel"
-                      [(ngModel)]="model.attack"
-                      (ngModelChange)="onStatChange()"
-                  >
+                    <input 
+                        type="number"
+                        min="{{minAttack}}"
+                        max="{{model.attack + freePoints}}"
+                        name="attack" 
+                        id="attack" 
+                        class="hidden"
+                        required
+                        readonly
+                        #attack="ngModel"
+                        [(ngModel)]="model.attack"
+                        (ngModelChange)="onStatChange()"
+                    >
                 </div>
-                <div *ngIf="attack.errors && (attack.dirty || attack.touched)" class="form-error">
+                <div class="mt-3 flex justify-between">
+                    <strong class="self-center">{{model.attack}}</strong>
+
+                    <div class="space-x-6">
+                        <button 
+                            (click)="decreaseStat('attack')"
+                            type="button" 
+                            class="stats-btn"
+                            [disabled]="model.attack <= minAttack"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M18 12H6" />
+                            </svg>
+                        </button>
+
+                        <button 
+                            (click)="increaseStat('attack')"
+                            type="button" 
+                            class="stats-btn"
+                            [disabled]="freePoints <= 0"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div *ngIf="attack.errors" class="form-error">
                     <span *ngIf="attack.errors['required']">Attack is required</span>
                     <span *ngIf="attack.errors['min']">Attack cannot be lower than {{minAttack}}</span>
                     <span *ngIf="attack.errors['max']">Attack cannot be greater than {{model.attack + freePoints}}</span>
                 </div>
             </div>
 
-            <div class="sm:col-span-2">
+            <div class="sm:col-span-2 border border-gray-300 rounded-md p-3">
                 <div class="flex justify-between">
                     <label for="defence" class="form-label"> Defence </label>
-                    <span class="text-sm text-gray-500">Min: {{minDefence}}</span>
+                    <span class="text-sm text-gray-500">Min: {{minDefence}}, Available: {{freePoints}}</span>
                 </div>
                 <div class="mt-1">
-                  <input 
-                      type="number" 
-                      min="{{minDefence}}"
-                      max="{{model.defence + freePoints}}"
-                      name="defence" 
-                      id="defence" 
-                      autocomplete="champion-defence" 
-                      class="form-input"
-                      required
-                      #defence="ngModel"
-                      [(ngModel)]="model.defence"
-                      (ngModelChange)="onStatChange()"
-                  >
+                    <input 
+                        type="number" 
+                        min="{{minDefence}}"
+                        max="{{model.defence + freePoints}}"
+                        name="defence" 
+                        id="defence" 
+                        class="hidden"
+                        required
+                        readonly
+                        #defence="ngModel"
+                        [(ngModel)]="model.defence"
+                        (ngModelChange)="onStatChange()"
+                    >
                 </div>
-                <div *ngIf="defence.errors && (defence.dirty || defence.touched)" class="form-error">
+                <div class="mt-3 flex justify-between">
+                    <strong class="self-center">{{model.defence}}</strong>
+
+                    <div class="space-x-6">
+                        <button 
+                            (click)="decreaseStat('defence')"
+                            type="button" 
+                            class="stats-btn"
+                            [disabled]="model.defence <= minDefence"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M18 12H6" />
+                            </svg>
+                        </button>
+
+                        <button 
+                            (click)="increaseStat('defence')"
+                            type="button" 
+                            class="stats-btn"
+                            [disabled]="freePoints <= 0"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div *ngIf="defence.errors" class="form-error">
                     <span *ngIf="defence.errors['required']">Defence is required</span>
                     <span *ngIf="defence.errors['min']">Defence cannot be lower than {{minDefence}}</span>
                     <span *ngIf="defence.errors['max']">Defence cannot be greater than {{model.defence + freePoints}}</span>
                 </div>
-            </div>  
-
-            <div class="sm:col-span-2">
-                <div class="flex justify-between">
-                    <label for="points" class="form-label"> Free points </label>
-                    <span class="text-sm text-gray-500">Readonly</span>
-                </div>
-                <div class="mt-1">
-                  <input 
-                      type="number" 
-                      min="0"
-                      name="points" 
-                      id="points" 
-                      class="form-input"
-                      readonly
-                      #points="ngModel"
-                      [(ngModel)]="freePoints"
-                  >
-                </div>
-                <div *ngIf="points.errors" class="form-error">
-                    <span *ngIf="points.errors['min']">Free points cannot be lower than 0</span>
-                </div>
-            </div>  
+            </div>
         </div>
 
         
         <div class="">
-            <label for="avatar" class="form-label"> Avatar </label>
+            <label for="avatar" class="form-label"> Avatar <sup class="text-red-600">*</sup> </label>
             <div class="">
                 <input 
                     type="hidden" 
@@ -193,7 +254,7 @@
                 type="checkbox" 
                 class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
             >
-            <label for="disclaimer" class="ml-2 block text-sm text-gray-900">Disclaimer: This project uses in memory database (for now), so every data you persist will be available only until page refresh.</label>
+            <label for="disclaimer" class="ml-2 block text-sm text-gray-900">Disclaimer: This project uses in memory database (for now), so every data you persist will be available only until page refresh. <sup class="text-red-600">*</sup></label>
             </div>
         </div>
 
