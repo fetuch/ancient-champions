@@ -35,7 +35,7 @@ export class FeatureListComponent implements OnInit {
     {
       name: 'Tests',
       description:
-        'Assure that the flow of an application is performing as designed from start to finish.',
+        'Assure that the flow of an application is performing as designed from start to finish (in progress).',
     },
     {
       name: 'Forms',
