@@ -6,20 +6,20 @@
         <p class="mt-4 text-lg text-gray-500">Create your unique champion.</p>
     </div>
 
-    <form 
+    <form
         #championForm="ngForm"
-        class="space-y-6" 
-        (ngSubmit)="onSubmit()" 
+        class="space-y-6"
+        (ngSubmit)="onSubmit()"
     >
         <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
             <div class="sm:col-span-3">
                 <label for="pantheon" class="form-label">Pantheon <sup class="text-red-600">*</sup></label>
                 <div class="mt-1">
-                    <select 
-                        id="pantheon" 
-                        name="pantheon" 
+                    <select
+                        id="pantheon"
+                        name="pantheon"
                         #pantheon="ngModel"
-                        required 
+                        required
                         autofocus
                         [(ngModel)]="model.pantheon"
                         class="form-input"
@@ -33,34 +33,35 @@
             <div class="sm:col-span-3">
               <label for="name" class="form-label">Champion name <sup class="text-red-600">*</sup></label>
               <div class="mt-1">
-                <input 
-                    type="text" 
-                    name="name" 
-                    id="name" 
-                    autocomplete="champion-name" 
+                <input
+                    type="text"
+                    name="name"
+                    id="name"
+                    autocomplete="champion-name"
                     class="form-input"
                     required
                     #name="ngModel"
-                    [(ngModel)]="model.name" 
+                    [(ngModel)]="model.name"
                 >
               </div>
               <p [hidden]="name.valid || name.pristine" class="form-error">Name is required</p>
             </div>
-    
+
             <div class="sm:col-span-2 border border-gray-300 rounded-md p-3">
                 <div class="flex justify-between">
-                    <label for="hp" class="form-label"> Hit points </label>
+                    <label for="hp" class="form-label"> Hit points <sup class="text-red-600">*</sup> </label>
                     <span class="text-sm text-gray-500">Min: {{minHp}}, Available: {{freePoints}}</span>
                 </div>
 
                 <div class="mt-1">
-                    <input 
+                    <input
                         type="number"
                         min="{{minHp}}"
                         max="{{model.hp + freePoints}}"
                         name="hp"
-                        autocomplete="champion-hp" 
+                        autocomplete="champion-hp"
                         class="hidden"
+                        required
                         readonly
                         #hp="ngModel"
                         [(ngModel)]="model.hp"
@@ -72,9 +73,9 @@
                     <strong class="self-center">{{model.hp}}</strong>
 
                     <div class="space-x-6">
-                        <button 
+                        <button
                             (click)="decreaseStat('hp')"
-                            type="button" 
+                            type="button"
                             class="stats-btn"
                             [disabled]="model.hp <= minHp"
                         >
@@ -83,9 +84,9 @@
                             </svg>
                         </button>
 
-                        <button 
+                        <button
                             (click)="increaseStat('hp')"
-                            type="button" 
+                            type="button"
                             class="stats-btn"
                             [disabled]="freePoints <= 0"
                         >
@@ -102,19 +103,19 @@
                     <span *ngIf="hp.errors['max']">Hp cannot be greater than {{model.hp + freePoints}}</span>
                 </div>
             </div>
-    
+
             <div class="sm:col-span-2 border border-gray-300 rounded-md p-3">
                 <div class="flex justify-between">
-                    <label for="attack" class="form-label"> Attack power </label>
+                    <label for="attack" class="form-label"> Attack power <sup class="text-red-600">*</sup></label>
                     <span class="text-sm text-gray-500">Min: {{minAttack}}, Available: {{freePoints}}</span>
                 </div>
                 <div class="mt-1">
-                    <input 
+                    <input
                         type="number"
                         min="{{minAttack}}"
                         max="{{model.attack + freePoints}}"
-                        name="attack" 
-                        id="attack" 
+                        name="attack"
+                        id="attack"
                         class="hidden"
                         required
                         readonly
@@ -127,9 +128,9 @@
                     <strong class="self-center">{{model.attack}}</strong>
 
                     <div class="space-x-6">
-                        <button 
+                        <button
                             (click)="decreaseStat('attack')"
-                            type="button" 
+                            type="button"
                             class="stats-btn"
                             [disabled]="model.attack <= minAttack"
                         >
@@ -138,9 +139,9 @@
                             </svg>
                         </button>
 
-                        <button 
+                        <button
                             (click)="increaseStat('attack')"
-                            type="button" 
+                            type="button"
                             class="stats-btn"
                             [disabled]="freePoints <= 0"
                         >
@@ -159,16 +160,16 @@
 
             <div class="sm:col-span-2 border border-gray-300 rounded-md p-3">
                 <div class="flex justify-between">
-                    <label for="defence" class="form-label"> Defence </label>
+                    <label for="defence" class="form-label"> Defence <sup class="text-red-600">*</sup></label>
                     <span class="text-sm text-gray-500">Min: {{minDefence}}, Available: {{freePoints}}</span>
                 </div>
                 <div class="mt-1">
-                    <input 
-                        type="number" 
+                    <input
+                        type="number"
                         min="{{minDefence}}"
                         max="{{model.defence + freePoints}}"
-                        name="defence" 
-                        id="defence" 
+                        name="defence"
+                        id="defence"
                         class="hidden"
                         required
                         readonly
@@ -181,9 +182,9 @@
                     <strong class="self-center">{{model.defence}}</strong>
 
                     <div class="space-x-6">
-                        <button 
+                        <button
                             (click)="decreaseStat('defence')"
-                            type="button" 
+                            type="button"
                             class="stats-btn"
                             [disabled]="model.defence <= minDefence"
                         >
@@ -192,9 +193,9 @@
                             </svg>
                         </button>
 
-                        <button 
+                        <button
                             (click)="increaseStat('defence')"
-                            type="button" 
+                            type="button"
                             class="stats-btn"
                             [disabled]="freePoints <= 0"
                         >
@@ -212,14 +213,14 @@
             </div>
         </div>
 
-        
+
         <div class="">
             <label for="avatar" class="form-label"> Avatar <sup class="text-red-600">*</sup> </label>
             <div class="">
-                <input 
-                    type="hidden" 
-                    name="avatar" 
-                    id="avatar" 
+                <input
+                    type="hidden"
+                    name="avatar"
+                    id="avatar"
                     required
                     #avatar="ngModel"
                     [(ngModel)]="model.avatar"
@@ -227,12 +228,12 @@
             </div>
 
             <div class="mt-1 grid grid-cols-3 gap-y-6 gap-x-4 sm:grid-cols-6">
-                <div 
-                    *ngFor="let avatar of images" 
+                <div
+                    *ngFor="let avatar of images"
                     class="col-span-1 overflow-hidden rounded-md"
                     >
                     <img
-                        src="{{avatar}}" 
+                        src="{{avatar}}"
                         alt=""
                         class="avatar"
                         [class.refused]="model.avatar && model.avatar !== avatar"
@@ -246,12 +247,12 @@
 
         <div class="flex items-center justify-between">
             <div class="flex items-center">
-            <input 
+            <input
                 ngModel
-                required 
-                id="disclaimer" 
-                name="disclaimer" 
-                type="checkbox" 
+                required
+                id="disclaimer"
+                name="disclaimer"
+                type="checkbox"
                 class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
             >
             <label for="disclaimer" class="ml-2 block text-sm text-gray-900">Disclaimer: This project uses in memory database (for now), so every data you persist will be available only until page refresh. <sup class="text-red-600">*</sup></label>
@@ -259,8 +260,8 @@
         </div>
 
         <div>
-            <button 
-                type="submit"   
+            <button
+                type="submit"
                 class="btn"
                 [disabled]="!championForm.form.valid"
             >Submit</button>
