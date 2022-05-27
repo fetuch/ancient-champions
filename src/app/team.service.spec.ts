@@ -1,18 +1,28 @@
+import {
+  HttpClientTestingModule,
+  HttpTestingController,
+} from '@angular/common/http/testing';
+import { HttpClient, HttpResponse } from '@angular/common/http';
+
 import { TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TeamService } from './team.service';
 
 describe('TeamService', () => {
-  let service: TeamService;
+  let httpClient: HttpClient;
+  let httpTestingController: HttpTestingController;
+  let teamService: TeamService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
     });
-    service = TestBed.inject(TeamService);
+
+    httpClient = TestBed.inject(HttpClient);
+    httpTestingController = TestBed.inject(HttpTestingController);
+    teamService = TestBed.inject(TeamService);
   });
 
   it('should be created', () => {
-    expect(service).toBeTruthy();
+    expect(teamService).toBeTruthy();
   });
 });
