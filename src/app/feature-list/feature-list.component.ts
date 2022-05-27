@@ -15,7 +15,7 @@ export class FeatureListComponent implements OnInit {
     {
       name: 'Responsive design',
       description:
-        'Pure CSS (SASS) and Tailwind to make the look neat and clean on all screens.',
+        'Mobile first aproach using pure CSS (SASS) and Tailwind to make the look neat and clean on all screens.',
     },
     {
       name: 'Router based navigation',
