@@ -33,5 +33,4 @@ There are default system generated champions with their base stats randomly twea
 
 The player forms a squad of three champions from one pantheon. The system then selects the opposing team and the battle begins.
 
-Each round, each champion chooses and attacks one live opponent.
-The game continues until all members of one team are dead or for 10 rounds. The battle progres is displayed in the form of a battle log.
+Each round, each champion chooses and attacks one live opponent. The game continues until all members of one team are dead or for 10 rounds. The battle progress is displayed in the form of a battle log.
