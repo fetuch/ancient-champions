@@ -1,27 +1,37 @@
 # AncientChampions
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.5.
+This project was created as a portfolio project presenting my knowledge of the frontend with particular emphasis on the angular framework. It was
+generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.5.
 
-## Development server
+## Instalation guide
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- clone the repo
+- run npm install
+- run ng serve
+- Navigate to `http://localhost:4200/`
 
-## Code scaffolding
+## Live example / demo
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Visit `https://ancient-champions.punkgate.pl/`
 
-## Build
+## Project features
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- Responsive design
+- Router based navigation
+- CRUD operations
+- Game mecahnics
+- Tests
+- Forms
+- Data tables
+- State management
 
-## Running unit tests
+## The Game
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+It is a team vs team batle game.
 
-## Running end-to-end tests
+There are default system generated champions with their base stats randomly tweaked. Each champion belongs to a group called pantheon. You can edit each champion and slightly modify its stats. You can also generate new one from scratch.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+The player forms a squad of three champions from one pantheon. The system then selects the opposing team and the battle begins.
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Each round, each champion chooses and attacks one live opponent.
+The game continues until all members of one team are dead or for 10 rounds. The battle progres is displayed in the form of a battle log.
