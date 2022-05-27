@@ -245,18 +245,20 @@
         </div>
 
 
-        <div class="flex items-center justify-between">
+        <div class="flex flex-col items-start justify-between">
             <div class="flex items-center">
-            <input
-                ngModel
-                required
-                id="disclaimer"
-                name="disclaimer"
-                type="checkbox"
-                class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
-            >
-            <label for="disclaimer" class="ml-2 block text-sm text-gray-900">Disclaimer: This project uses in memory database (for now), so every data you persist will be available only until page refresh. <sup class="text-red-600">*</sup></label>
+                <input
+                    ngModel
+                    #disclaimer="ngModel"
+                    required
+                    id="disclaimer"
+                    name="disclaimer"
+                    type="checkbox"
+                    class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                >
+                <label for="disclaimer" class="ml-2 block text-sm text-gray-900">Disclaimer: This project uses in memory database (for now), so every data you persist will be available only until page refresh. <sup class="text-red-600">*</sup></label>
             </div>
+            <p [hidden]="disclaimer.valid || disclaimer.pristine" class="form-error">Field is required</p>
         </div>
 
         <div>

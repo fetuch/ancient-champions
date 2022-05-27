@@ -46,9 +46,9 @@ export class FeatureListComponent implements OnInit {
       description: 'Sortable and searchable datatable',
     },
     {
-      name: 'Need one more',
+      name: 'State Management',
       description:
-        'Tempor tellus in aliquet eu et sit nulla tellus. Suspendisse est, molestie blandit quis ac. Lacus.',
+        'Passing data using Input/Output decorators and Event Emitters. Passing data using Shared Services.',
     },
   ];
 

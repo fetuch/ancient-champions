@@ -100,42 +100,14 @@ export class ChampionFormComponent implements OnInit {
   }
 
   saveChampion() {
-    this.championService.addChampion(this.model).subscribe((champion) => {
-      //update champion's pantheon list of champions
-      const pantheon = this.pantheons?.find(
-        (pantheon) => pantheon.name === champion.pantheon
-      );
-
-      if (pantheon) {
-        pantheon.champions?.push(champion);
-
-        this.pantheonService.updatePantheon(pantheon).subscribe(() => {
-          this.goBack();
-        });
-      }
+    this.championService.addChampion(this.model).subscribe(() => {
+      this.goBack();
     });
   }
 
   updateChampion() {
     this.championService.updateChampion(this.model).subscribe(() => {
-      //update champion's pantheon list of champions
-      const pantheon = this.pantheons?.find(
-        (pantheon) => pantheon.name === this.model.pantheon
-      );
-
-      if (pantheon) {
-        const index = pantheon.champions!.findIndex(
-          (champion) => champion.id === this.model.id
-        );
-
-        if (index !== -1) {
-          pantheon.champions![index] = this.model;
-        }
-
-        this.pantheonService.updatePantheon(pantheon).subscribe(() => {
-          this.goBack();
-        });
-      }
+      this.goBack();
     });
   }
 

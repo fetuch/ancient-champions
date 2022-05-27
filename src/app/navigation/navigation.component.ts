@@ -26,13 +26,13 @@ export class NavigationComponent implements OnInit {
       exact: true,
     },
     {
-      link: '/pantheons',
-      name: 'Pantheons',
+      link: '/champions',
+      name: 'Champions',
       exact: false,
     },
     {
-      link: '/champions',
-      name: 'Champions',
+      link: '/pantheons',
+      name: 'Pantheons',
       exact: false,
     },
   ];

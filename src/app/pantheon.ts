@@ -4,5 +4,5 @@ export interface Pantheon {
   id: number;
   name: string;
   banner: string;
-  champions?: Champion[];
+  champions: Champion[];
 }

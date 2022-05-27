@@ -8,9 +8,8 @@ describe('PantheonComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PantheonComponent ]
-    })
-    .compileComponents();
+      declarations: [PantheonComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

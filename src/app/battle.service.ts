@@ -4,6 +4,7 @@ import { Champion } from './champion';
 import { Pantheon } from './pantheon';
 import { Team } from './team';
 import { Log } from './log';
+import { ChampionService } from './champion.service';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +17,10 @@ export class BattleService {
   currentChampionIndex: number = 0;
   delayMiliseconds: number = 300;
 
-  constructor(private battleLogService: BattleLogService) {}
+  constructor(
+    private battleLogService: BattleLogService,
+    private championService: ChampionService
+  ) {}
 
   init(opponents: Team[]): void {
     this.resetToDefaults();
@@ -133,9 +137,7 @@ export class BattleService {
   }
 
   createTemporaryTeam(pantheon: Pantheon): Team {
-    const team = pantheon
-      .champions!.sort(() => Math.random() - 0.5)
-      .slice(0, 3);
+    const team = pantheon.champions.sort(() => Math.random() - 0.5).slice(0, 3);
 
     this.log({
       message: 'Opponent team has been selected.',

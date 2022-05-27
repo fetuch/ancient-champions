@@ -3,7 +3,7 @@
         <div class="">
             <h1 class="text-3xl font-extrabold text-gray-900">Champions</h1>
             <p class="mt-4 text-lg text-gray-500">A list of all the champions including their name, avatar, stats and pantheon.</p>
-            
+
             <div class="mt-3 relative text-gray-400 focus-within:text-gray-600">
                 <div class="pointer-events-none absolute inset-y-0 left-0 pl-3 flex items-center">
                   <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -11,11 +11,11 @@
                   </svg>
                 </div>
 
-                <input 
-                    #searchBox 
+                <input
+                    #searchBox
                     autocomplete="search-champions"
-                    (input)="search(searchBox.value)" 
-                    class="block w-full bg-white py-2 pl-10 pr-3 border border-gray-300 rounded-md text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-600 focus:ring-white focus:border-white sm:text-sm" 
+                    (input)="search(searchBox.value)"
+                    class="block w-full bg-white py-2 pl-10 pr-3 border border-gray-300 rounded-md text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-600 focus:ring-white focus:border-white sm:text-sm"
                     placeholder="Search champion" type="search" name="search">
             </div>
         </div>
@@ -124,9 +124,9 @@
                                     <div>HP: {{champion.hp}}</div>
                                     <div>Attack: {{champion.attack}}</div>
                                     <div>Defence: {{champion.defence}}</div>
-                                </div>    
+                                </div>
                             </div>
-                        </div>                                         
+                        </div>
                     </td>
 
                     <td class="hidden lg:table-cell p-4">{{champion.hp}}</td>
@@ -138,11 +138,44 @@
                     <td class="hidden md:table-cell p-4">{{champion.pantheon}}</td>
 
                     <td class="p-4">
-                        <a routerLink="/champions/{{champion.id}}/edit" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                        <div class="flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-3">
+                            <a routerLink="/champions/{{champion.id}}/edit" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                            <span
+                                class="text-red-500 hover:text-red-600 cursor-pointer"
+                                (click)="onDeleteChampion(champion.id)"
+                            >Delete</span>
+                        </div>
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
+
+
+    <div *ngIf="showDeleteModal" class="fixed z-10 inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+
+    <div *ngIf="showDeleteModal" class="fixed z-10 inset-0 overflow-y-auto">
+        <div class="flex items-end sm:items-center justify-center min-h-full p-4 text-center sm:p-0">
+            <div
+                class="relative bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-lg sm:w-full sm:p-6">
+                <div class="sm:flex sm:items-start">
+                    <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                        <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">Delete champion</h3>
+                        <div class="mt-2">
+                            <p class="text-sm text-gray-500">Are you sure you want to delete this champion?</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
+                    <button type="button"
+                        class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"
+                        (click)="confirmDelete()">Confirm</button>
+                    <button type="button"
+                        class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:w-auto sm:text-sm"
+                        (click)="showDeleteModal = false">Cancel</button>
+                </div>
+            </div>
+        </div>
 
 </div>

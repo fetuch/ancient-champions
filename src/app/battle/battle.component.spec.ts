@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ActivatedRoute } from '@angular/router';
 
 import { BattleComponent } from './battle.component';
 
@@ -8,9 +9,9 @@ describe('BattleComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BattleComponent ]
-    })
-    .compileComponents();
+      declarations: [BattleComponent],
+      imports: [ActivatedRoute],
+    }).compileComponents();
   });
 
   beforeEach(() => {

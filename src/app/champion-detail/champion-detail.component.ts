@@ -11,7 +11,6 @@ export class ChampionDetailComponent implements OnInit {
   @Input() selected?: boolean;
   @Input() banner?: string;
   @Output() itemEvent = new EventEmitter<Champion>();
-  @Output() deleteEvent = new EventEmitter<Champion>();
 
   constructor() {}
 
@@ -19,9 +18,5 @@ export class ChampionDetailComponent implements OnInit {
 
   toggleSelectedChampion(): void {
     this.itemEvent.emit(this.champion);
-  }
-
-  onDeleteChampion(): void {
-    this.deleteEvent.emit(this.champion);
   }
 }

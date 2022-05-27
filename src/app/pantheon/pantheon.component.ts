@@ -14,10 +14,8 @@ import { TeamService } from '../team.service';
 })
 export class PantheonComponent implements OnInit {
   pantheon?: Pantheon;
-  champion?: Champion;
   selectedChampions: Champion[] = [];
   requiredChampions: number = 3;
-  showDeleteModal: boolean = false;
 
   constructor(
     private router: Router,
@@ -35,7 +33,14 @@ export class PantheonComponent implements OnInit {
     const id = Number(this.route.snapshot.paramMap.get('id'));
 
     this.pantheonService.getPantheon(id).subscribe((pantheon) => {
-      this.pantheon = pantheon;
+      this.championService.getChampions().subscribe((champions) => {
+        const pantheonChampions = champions.filter(
+          (champion) => champion.pantheon === pantheon.name
+        );
+
+        pantheon.champions = pantheonChampions;
+        this.pantheon = pantheon;
+      });
     });
   }
 
@@ -67,23 +72,5 @@ export class PantheonComponent implements OnInit {
     this.teamService.registerTeam({ members } as Team).subscribe((team) => {
       this.router.navigate([`/battle/${team.id}`]);
     });
-  }
-
-  showDeleteConfirmation(champion: Champion): void {
-    this.champion = champion;
-
-    this.showDeleteModal = true;
-  }
-
-  confirmDelete(): void {
-    this.showDeleteModal = false;
-
-    this.pantheon!.champions = this.pantheon?.champions?.filter(
-      (champion) => champion.id !== this.champion?.id
-    );
-
-    this.championService.deleteChampion(this.champion!.id).subscribe();
-
-    this.pantheonService.updatePantheon(this.pantheon!).subscribe();
   }
 }

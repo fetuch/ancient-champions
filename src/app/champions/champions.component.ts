@@ -14,6 +14,8 @@ export class ChampionsComponent implements OnInit {
   champions?: Champion[];
   sortColumn: string = 'name';
   sortDir: boolean = true;
+  showDeleteModal: boolean = false;
+  deleteChampionId: number | null = null;
   private searchTerms = new Subject<string>();
 
   constructor(private championService: ChampionService) {}
@@ -71,5 +73,24 @@ export class ChampionsComponent implements OnInit {
 
   search(term: string): void {
     this.searchTerms.next(term);
+  }
+
+  onDeleteChampion(id: number): void {
+    this.deleteChampionId = id;
+    this.showDeleteModal = true;
+  }
+
+  confirmDelete(): void {
+    this.showDeleteModal = false;
+
+    if (this.deleteChampionId) {
+      this.champions = this.champions?.filter(
+        (champion) => champion.id !== this.deleteChampionId
+      );
+
+      this.championService
+        .deleteChampion(this.deleteChampionId)
+        .subscribe(() => (this.deleteChampionId = null));
+    }
   }
 }
