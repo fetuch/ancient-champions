@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
 import { Champion } from '../champion';
@@ -15,7 +15,6 @@ import { PantheonService } from '../pantheon.service';
 })
 export class ChampionFormComponent implements OnInit {
   pantheons?: Pantheon[];
-  champion?: Champion;
 
   model = {
     hp: baseHP,
@@ -39,33 +38,30 @@ export class ChampionFormComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
     private location: Location,
     private pantheonService: PantheonService,
     private championService: ChampionService
   ) {}
 
   ngOnInit(): void {
-    this.getChampion();
     this.getPantheons();
+
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    if (id) this.getChampion(id);
   }
 
-  getChampion() {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
+  getChampion(id: number) {
+    this.championService.getChampion(id).subscribe((champion) => {
+      // this.champion = champion;
 
-    if (id) {
-      this.championService.getChampion(id).subscribe((champion) => {
-        this.champion = champion;
+      this.model = champion;
 
-        this.model = champion;
+      if (!this.images.includes(champion.avatar)) {
+        this.images = [...this.images, champion.avatar];
+      }
 
-        if (!this.images.includes(champion.avatar)) {
-          this.images = [...this.images, champion.avatar];
-        }
-
-        this.onStatChange();
-      });
-    }
+      this.onStatChange();
+    });
   }
 
   getPantheons(): void {
@@ -75,11 +71,7 @@ export class ChampionFormComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.champion) {
-      this.updateChampion();
-    } else {
-      this.saveChampion();
-    }
+    this.model.id ? this.updateChampion() : this.saveChampion();
   }
 
   onStatChange() {
