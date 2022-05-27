@@ -4,11 +4,11 @@
           <h1 class="text-3xl font-extrabold text-gray-900">{{pantheon.name}} Pantheon</h1>
           <p class="mt-4 text-lg text-gray-500">Gather together for the glory and the might. Pick three of those champions and attack.</p>
         </div>
-    
-        <ul class="mt-6 space-y-6 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:gap-y-6 md:grid-cols-3">
+
+        <ul class="mt-6 space-y-6 sm:space-y-0 justify-center grid sm:grid-cols-2 sm:gap-x-6 sm:gap-y-6 md:grid-cols-3">
           <li *ngFor="let champion of pantheon.champions">
-            <app-champion-detail 
-                [champion]="champion" 
+            <app-champion-detail
+                [champion]="champion"
                 [selected]="selectedChampions.includes(champion)"
                 [banner]="pantheon.banner"
                 (itemEvent)="toggleSelectedChampion($event)"
@@ -20,17 +20,17 @@
 
     <div class="flex space-x-3 fixed lg:static bottom-0 bg-white border-t lg:border-none border-gray-200 w-full -mx-4 sm:-mx-6 lg:mx-0 p-4 lg:p-0 lg:mt-12">
         <div class="flex-1 lg:text-xl self-center">
-            Your team: 
-            <span 
+            Your team:
+            <span
               *ngFor="let champion of selectedChampions"
             >
                 {{champion.name}}
             </span>
           </div>
 
-        <button 
+        <button
           class="btn self-center"
-          (click)="confirmTheTeamSquad()" 
+          (click)="confirmTheTeamSquad()"
           [disabled]="selectedChampions.length !== requiredChampions"
         >Confirm</button>
     </div>
@@ -50,13 +50,13 @@
           </div>
 
           <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
-            <button 
-              type="button" 
+            <button
+              type="button"
               class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"
               (click)="confirmDelete()"
               >Confirm</button>
-            <button 
-              type="button" 
+            <button
+              type="button"
               class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:w-auto sm:text-sm"
               (click)="showDeleteModal = false"
               >Cancel</button>
