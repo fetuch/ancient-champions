@@ -1,14 +1,37 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HomepageComponent } from './homepage.component';
+import { PantheonService } from '../pantheon.service';
+import { ChampionService } from '../champion.service';
+import { of } from 'rxjs';
 
 describe('HomepageComponent', () => {
   let component: HomepageComponent;
   let fixture: ComponentFixture<HomepageComponent>;
+  let fakeChampionService: ChampionService;
+  let fakePantheonService: PantheonService;
 
   beforeEach(async () => {
+    fakeChampionService = jasmine.createSpyObj<ChampionService>(
+      'ChampionService',
+      {
+        getChampions: of(),
+      }
+    );
+
+    fakePantheonService = jasmine.createSpyObj<PantheonService>(
+      'PantheonService',
+      {
+        getPantheon: of(),
+      }
+    );
+
     await TestBed.configureTestingModule({
       declarations: [HomepageComponent],
+      providers: [
+        { provide: PantheonService, useValue: fakePantheonService },
+        { provide: ChampionService, useValue: fakeChampionService },
+      ],
     }).compileComponents();
   });
 
