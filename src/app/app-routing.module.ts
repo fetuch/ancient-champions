@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomepageComponent } from './homepage/homepage.component';
-import { PantheonComponent } from './pantheon/pantheon.component';
-import { PantheonsComponent } from './pantheons/pantheons.component';
-import { BattleComponent } from './battle/battle.component';
-import { ChampionFormComponent } from './champion-form/champion-form.component';
-import { ChampionsComponent } from './champions/champions.component';
+import { HomepageComponent } from './components/homepage/homepage.component';
+import { PantheonComponent } from './components/pantheon/pantheon.component';
+import { PantheonsComponent } from './components/pantheons/pantheons.component';
+import { BattleComponent } from './components/battle/battle.component';
+import { ChampionFormComponent } from './components/champion-form/champion-form.component';
+import { ChampionsComponent } from './components/champions/champions.component';
 
 const routes: Routes = [
   { path: '', component: HomepageComponent },

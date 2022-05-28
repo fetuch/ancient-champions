@@ -2,11 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
-import { Champion } from '../champion';
-import { ChampionService } from '../services/champion.service';
-import { baseHP, baseAttack, baseDefence, baseImgUrl } from '../mock-champions';
-import { Pantheon } from '../pantheon';
-import { PantheonService } from '../services/pantheon.service';
+import { Champion } from '../../champion';
+import { ChampionService } from '../../services/champion.service';
+import {
+  baseHP,
+  baseAttack,
+  baseDefence,
+  baseImgUrl,
+} from '../../mock-champions';
+import { Pantheon } from '../../pantheon';
+import { PantheonService } from '../../services/pantheon.service';
 
 @Component({
   selector: 'app-champion-form',

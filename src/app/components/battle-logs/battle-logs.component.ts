@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { BattleLogService } from '../services/battle-log.service';
-import { Log } from '../log';
+import { BattleLogService } from '../../services/battle-log.service';
+import { Log } from '../../log';
 
 @Component({
   selector: 'app-battle-logs',

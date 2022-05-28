@@ -2,11 +2,11 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { BattleComponent } from './battle.component';
-import { PantheonService } from '../services/pantheon.service';
-import { TeamService } from '../services/team.service';
-import { ChampionService } from '../services/champion.service';
-import { BattleLogService } from '../services/battle-log.service';
-import { BattleService } from '../services/battle.service';
+import { PantheonService } from '../../services/pantheon.service';
+import { TeamService } from '../../services/team.service';
+import { ChampionService } from '../../services/champion.service';
+import { BattleLogService } from '../../services/battle-log.service';
+import { BattleService } from '../../services/battle.service';
 import { of } from 'rxjs';
 
 describe('BattleComponent', () => {

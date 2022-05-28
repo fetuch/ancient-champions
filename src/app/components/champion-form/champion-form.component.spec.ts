@@ -1,51 +1,44 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { PantheonComponent } from './pantheon.component';
-import { PantheonService } from '../services/pantheon.service';
-import { ChampionService } from '../services/champion.service';
-import { TeamService } from '../services/team.service';
+import { ChampionFormComponent } from './champion-form.component';
+import { PantheonService } from '../../services/pantheon.service';
+import { ChampionService } from '../../services/champion.service';
 import { of } from 'rxjs';
+import { FormsModule } from '@angular/forms';
 
-describe('PantheonComponent', () => {
-  let component: PantheonComponent;
-  let fixture: ComponentFixture<PantheonComponent>;
+describe('ChampionFormComponent', () => {
+  let component: ChampionFormComponent;
+  let fixture: ComponentFixture<ChampionFormComponent>;
   let fakeChampionService: ChampionService;
   let fakePantheonService: PantheonService;
-  let fakeTeamService: TeamService;
 
   beforeEach(async () => {
     fakeChampionService = jasmine.createSpyObj<ChampionService>(
       'ChampionService',
       {
-        getChampions: of([]),
+        getChampion: of(),
       }
     );
 
     fakePantheonService = jasmine.createSpyObj<PantheonService>(
       'PantheonService',
       {
-        getPantheon: of(),
+        getPantheons: of(),
       }
     );
-
-    fakeTeamService = jasmine.createSpyObj<TeamService>('TeamService', {
-      registerTeam: undefined,
-    });
-
     await TestBed.configureTestingModule({
-      imports: [RouterTestingModule],
-      declarations: [PantheonComponent],
+      imports: [RouterTestingModule, FormsModule],
+      declarations: [ChampionFormComponent],
       providers: [
         { provide: PantheonService, useValue: fakePantheonService },
         { provide: ChampionService, useValue: fakeChampionService },
-        { provide: TeamService, useValue: fakeTeamService },
       ],
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PantheonComponent);
+    fixture = TestBed.createComponent(ChampionFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

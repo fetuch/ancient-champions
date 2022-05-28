@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Pantheon } from '../pantheon';
-import { PantheonService } from '../services/pantheon.service';
+import { Pantheon } from '../../pantheon';
+import { PantheonService } from '../../services/pantheon.service';
 
 @Component({
   selector: 'app-pantheons',

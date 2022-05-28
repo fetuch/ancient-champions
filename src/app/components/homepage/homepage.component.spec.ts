@@ -1,15 +1,13 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
 
-import { ChampionFormComponent } from './champion-form.component';
-import { PantheonService } from '../services/pantheon.service';
-import { ChampionService } from '../services/champion.service';
+import { HomepageComponent } from './homepage.component';
+import { PantheonService } from '../../services/pantheon.service';
+import { ChampionService } from '../../services/champion.service';
 import { of } from 'rxjs';
-import { FormsModule } from '@angular/forms';
 
-describe('ChampionFormComponent', () => {
-  let component: ChampionFormComponent;
-  let fixture: ComponentFixture<ChampionFormComponent>;
+describe('HomepageComponent', () => {
+  let component: HomepageComponent;
+  let fixture: ComponentFixture<HomepageComponent>;
   let fakeChampionService: ChampionService;
   let fakePantheonService: PantheonService;
 
@@ -17,19 +15,19 @@ describe('ChampionFormComponent', () => {
     fakeChampionService = jasmine.createSpyObj<ChampionService>(
       'ChampionService',
       {
-        getChampion: of(),
+        getChampions: of(),
       }
     );
 
     fakePantheonService = jasmine.createSpyObj<PantheonService>(
       'PantheonService',
       {
-        getPantheons: of(),
+        getPantheon: of(),
       }
     );
+
     await TestBed.configureTestingModule({
-      imports: [RouterTestingModule, FormsModule],
-      declarations: [ChampionFormComponent],
+      declarations: [HomepageComponent],
       providers: [
         { provide: PantheonService, useValue: fakePantheonService },
         { provide: ChampionService, useValue: fakeChampionService },
@@ -38,12 +36,21 @@ describe('ChampionFormComponent', () => {
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ChampionFormComponent);
+    fixture = TestBed.createComponent(HomepageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should render title', () => {
+    const fixture = TestBed.createComponent(HomepageComponent);
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('h1')?.textContent).toContain(
+      'Ancient Champions'
+    );
   });
 });

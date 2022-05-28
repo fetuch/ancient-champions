@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ChampionService } from '../services/champion.service';
-import { Pantheon } from '../pantheon';
-import { PantheonService } from '../services/pantheon.service';
+import { ChampionService } from '../../services/champion.service';
+import { Pantheon } from '../../pantheon';
+import { PantheonService } from '../../services/pantheon.service';
 
 @Component({
   selector: 'app-homepage',
