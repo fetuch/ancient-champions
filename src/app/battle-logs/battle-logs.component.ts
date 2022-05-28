@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { BattleLogService } from '../battle-log.service';
+import { BattleLogService } from '../services/battle-log.service';
 import { Log } from '../log';
 
 @Component({

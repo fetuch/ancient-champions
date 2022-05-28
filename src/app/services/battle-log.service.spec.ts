@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 
 import { BattleLogService } from './battle-log.service';
-import { Log } from './log';
+import { Log } from '../log';
 
 describe('BattleLogService', () => {
   let service: BattleLogService;

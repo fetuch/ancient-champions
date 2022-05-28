@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PantheonsComponent } from './pantheons.component';
-import { PantheonService } from '../pantheon.service';
+import { PantheonService } from '../services/pantheon.service';
 import { of } from 'rxjs';
 
 describe('PantheonsComponent', () => {

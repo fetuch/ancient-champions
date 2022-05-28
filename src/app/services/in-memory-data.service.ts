@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { InMemoryDbService } from 'angular-in-memory-web-api';
-import { Pantheon } from './pantheon';
-import { Champion } from './champion';
-import { CHAMPIONS } from './mock-champions';
-import { PANTHEONS } from './mock-pantheons';
-import { Team } from './team';
+import { Pantheon } from '../pantheon';
+import { Champion } from '../champion';
+import { CHAMPIONS } from '../mock-champions';
+import { PANTHEONS } from '../mock-pantheons';
+import { Team } from '../team';
 
 @Injectable({
   providedIn: 'root',

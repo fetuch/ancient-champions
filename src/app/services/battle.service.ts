@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { BattleLogService } from './battle-log.service';
-import { Champion } from './champion';
-import { Pantheon } from './pantheon';
-import { Team } from './team';
-import { Log } from './log';
-import { ChampionService } from './champion.service';
+import { Champion } from '../champion';
+import { Pantheon } from '../pantheon';
+import { Team } from '../team';
+import { Log } from '../log';
 
 @Injectable({
   providedIn: 'root',
@@ -17,10 +16,7 @@ export class BattleService {
   currentChampionIndex: number = 0;
   delayMiliseconds: number = 300;
 
-  constructor(
-    private battleLogService: BattleLogService,
-    private championService: ChampionService
-  ) {}
+  constructor(private battleLogService: BattleLogService) {}
 
   init(opponents: Team[]): void {
     this.resetToDefaults();

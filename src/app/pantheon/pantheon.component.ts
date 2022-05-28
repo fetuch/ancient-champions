@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Champion } from '../champion';
-import { ChampionService } from '../champion.service';
+import { ChampionService } from '../services/champion.service';
 import { Pantheon } from '../pantheon';
-import { PantheonService } from '../pantheon.service';
+import { PantheonService } from '../services/pantheon.service';
 import { Team } from '../team';
-import { TeamService } from '../team.service';
+import { TeamService } from '../services/team.service';
 
 @Component({
   selector: 'app-pantheon',

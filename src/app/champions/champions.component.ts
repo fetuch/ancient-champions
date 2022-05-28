@@ -3,7 +3,7 @@ import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 
 import { Champion } from '../champion';
-import { ChampionService } from '../champion.service';
+import { ChampionService } from '../services/champion.service';
 
 @Component({
   selector: 'app-champions',
