@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 
-import { Pantheon } from './pantheon';
+import { Pantheon } from '../pantheon';
 import { Observable, of } from 'rxjs';
 
 @Injectable({

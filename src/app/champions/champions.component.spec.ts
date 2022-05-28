@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ChampionService } from '../champion.service';
+import { ChampionService } from '../services/champion.service';
 import { ChampionsComponent } from './champions.component';
 import { of } from 'rxjs';
 

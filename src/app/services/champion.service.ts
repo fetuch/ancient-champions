@@ -4,9 +4,9 @@ import { catchError, Observable } from 'rxjs';
 import {
   HandleError,
   HttpErrorHandlerService,
-} from './http-error-handler.service';
+} from '../services/http-error-handler.service';
 
-import { Champion } from './champion';
+import { Champion } from '../champion';
 
 @Injectable({
   providedIn: 'root',

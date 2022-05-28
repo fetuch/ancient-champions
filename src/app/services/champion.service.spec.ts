@@ -7,7 +7,7 @@ import {
 import { TestBed } from '@angular/core/testing';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 
-import { Champion } from './champion';
+import { Champion } from '../champion';
 import { ChampionService } from './champion.service';
 
 describe('ChampionService', () => {

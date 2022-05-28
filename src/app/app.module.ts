@@ -10,7 +10,7 @@ import { AppComponent } from './app.component';
 import { PantheonsComponent } from './pantheons/pantheons.component';
 import { PantheonDetailComponent } from './pantheon-detail/pantheon-detail.component';
 import { PantheonComponent } from './pantheon/pantheon.component';
-import { InMemoryDataService } from './in-memory-data.service';
+import { InMemoryDataService } from './services/in-memory-data.service';
 import { BattleComponent } from './battle/battle.component';
 import { BattleLogsComponent } from './battle-logs/battle-logs.component';
 import { BattleChampionDetailComponent } from './battle-champion-detail/battle-champion-detail.component';
