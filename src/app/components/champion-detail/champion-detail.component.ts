@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { Champion } from '../champion';
+import { Champion } from '../../champion';
 
 @Component({
   selector: 'app-champion-detail',

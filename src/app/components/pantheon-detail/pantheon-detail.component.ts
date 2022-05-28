@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Pantheon } from '../pantheon';
+import { Pantheon } from '../../pantheon';
 
 @Component({
   selector: 'app-pantheon-detail',

@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { BattleLogService } from '../services/battle-log.service';
-import { BattleService } from '../services/battle.service';
-import { ChampionService } from '../services/champion.service';
-import { PantheonService } from '../services/pantheon.service';
+import { BattleLogService } from '../../services/battle-log.service';
+import { BattleService } from '../../services/battle.service';
+import { ChampionService } from '../../services/champion.service';
+import { PantheonService } from '../../services/pantheon.service';
 
-import { Team } from '../team';
-import { TeamService } from '../services/team.service';
+import { Team } from '../../team';
+import { TeamService } from '../../services/team.service';
 
 @Component({
   selector: 'app-battle',

@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 
-import { Champion } from '../champion';
-import { ChampionService } from '../services/champion.service';
+import { Champion } from '../../champion';
+import { ChampionService } from '../../services/champion.service';
 
 @Component({
   selector: 'app-champions',
