@@ -4,7 +4,6 @@ import { Champion } from '../champion';
 import { Team } from '../team';
 import { Log } from '../log';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { TeamService } from './team.service';
 import { ChampionService } from './champion.service';
 
 @Injectable({
@@ -22,7 +21,6 @@ export class BattleService {
 
   constructor(
     private battleLogService: BattleLogService,
-    private teamService: TeamService,
     private championService: ChampionService
   ) {
     this.subject = new BehaviorSubject(this.opponents);
