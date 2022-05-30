@@ -27,7 +27,7 @@ Visit `https://ancient-champions.punkgate.pl/`
 
 ## The Game
 
-It is a team vs team batle game.
+It is a team vs team battle game.
 
 There are default system generated champions with their base stats randomly tweaked. Each champion belongs to a group called pantheon. You can edit each champion and slightly modify its stats. You can also generate new one from scratch.
 
