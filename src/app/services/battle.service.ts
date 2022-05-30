@@ -1,27 +1,33 @@
 import { Injectable } from '@angular/core';
 import { BattleLogService } from './battle-log.service';
 import { Champion } from '../champion';
-import { Pantheon } from '../pantheon';
 import { Team } from '../team';
 import { Log } from '../log';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { ChampionService } from './champion.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BattleService {
-  opponents?: Team[];
+  opponents: Team[] = [];
   rounds: number = 10;
   champions: Champion[] = [];
   currentChampion?: Champion;
   currentChampionIndex: number = 0;
   delayMiliseconds: number = 300;
 
-  constructor(private battleLogService: BattleLogService) {}
+  private subject: BehaviorSubject<Team[]>;
 
-  init(opponents: Team[]): void {
+  constructor(
+    private battleLogService: BattleLogService,
+    private championService: ChampionService
+  ) {
+    this.subject = new BehaviorSubject(this.opponents);
+  }
+
+  init(): void {
     this.resetToDefaults();
-
-    this.opponents = opponents;
 
     // Recursive call untill end of game
     this.playNextRound();
@@ -93,7 +99,7 @@ export class BattleService {
   }
 
   displaySummary(): void {
-    const winningTeam = this.opponents?.find((team) =>
+    const winningTeam = this.opponents.find((team) =>
       team.members.some((member) => member.hp > 0)
     );
     this.log({
@@ -132,24 +138,31 @@ export class BattleService {
     );
   }
 
-  createTemporaryTeam(pantheon: Pantheon): Team {
-    const team = pantheon.champions.sort(() => Math.random() - 0.5).slice(0, 3);
+  prepareOpponents(team: Team) {
+    this.championService.getChampions().subscribe((champions) => {
+      // get champions from pantheons different than team pantheon
+      const availableChampions = champions.filter(
+        (champion) => champion.pantheon !== team.members[0].pantheon
+      );
 
-    this.log({
-      message: 'Opponent team has been selected.',
+      // pick opposite pantheon
+      const oppositePantheon = availableChampions.sort(
+        () => Math.random() - 0.5
+      )[0].pantheon;
+
+      // select opposite team - three champions randomly taken from selected pantheon
+      const members = champions
+        .filter((champion) => champion.pantheon === oppositePantheon)
+        .sort((a, b) => Math.random() - 0.5)
+        .slice(0, 3);
+
+      const opponents: Team[] = [team, { members } as Team];
+      this.opponents = opponents;
+      this.log({
+        message: 'Opponent team has been selected.',
+      });
+      this.notify();
     });
-
-    return { members: team } as Team;
-  }
-
-  getAvailablePantheons(pantheons: Pantheon[], team: Team): Pantheon[] {
-    return pantheons.filter(
-      (pantheon) => pantheon.name !== team.members[0].pantheon
-    );
-  }
-
-  getRandomPantheon(pantheons: Pantheon[]): Pantheon {
-    return pantheons[Math.floor(Math.random() * pantheons.length)];
   }
 
   delay(ms: number) {
@@ -159,5 +172,13 @@ export class BattleService {
   /** Log a BattleService message with the BattleLogService */
   private log(log: Log) {
     this.battleLogService.add(log);
+  }
+
+  public getOpponents(): Observable<Team[]> {
+    return this.subject.asObservable();
+  }
+
+  private notify(): void {
+    this.subject.next(this.opponents);
   }
 }

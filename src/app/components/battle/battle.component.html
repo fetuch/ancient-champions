@@ -5,9 +5,12 @@
     </div>
 </div>
 
-<div class="mb-6 flex justify-between flex-col lg:flex-row space-y-6 lg:space-y-0 lg:space-x-12">
+<div
+    *ngIf="opponents$ | async as opponents"
+    class="mb-6 flex justify-between flex-col lg:flex-row space-y-6 lg:space-y-0 lg:space-x-12"
+>
     <div class="team">
-        <div 
+        <div
             *ngIf="opponents[0]"
             class="flex lg:flex-col"
         >
@@ -20,16 +23,16 @@
 
     <div class="separator grid justify-center content-center">
         <div *ngIf="opponents[0] && !opponents[1]" class="text-center text-lg text-gray-500">Choosing the opposite team...</div>
-        <button 
-            *ngIf="opponents[1]" 
-            class="btn" 
+        <button
+            *ngIf="opponents[1]"
+            class="btn"
             [disabled]="startDisabled"
             (click)="startTheBattle()"
         >FIGHT!!!</button>
     </div>
 
     <div class="team">
-        <div 
+        <div
             *ngIf="opponents[1]"
             class="flex lg:flex-col"
         >
@@ -47,7 +50,7 @@
     <div class="text-center">
         <p class="text-sm font-semibold text-indigo-600 uppercase tracking-wide">404 error</p>
         <h1 class="mt-2 text-4xl font-extrabold text-gray-900 tracking-tight sm:text-5xl">Team not found.</h1>
-        <p class="mt-2 text-base text-gray-500">Sorry, we couldn’t find the team. Please have in mind that this project uses 'in memmory' database and all entries are lost on page refresh.</p>
+        <p class="mt-2 text-base text-gray-500">Sorry, we couldn’t find the team. Please have in mind that this project uses 'in memmory' database and all entries (including selected team) are lost on page refresh.</p>
         <div class="mt-6">
         <a routerLink="/pantheons" class="text-base font-medium text-indigo-600 hover:text-indigo-500">Pick your champions again.<span aria-hidden="true"> &rarr;</span></a>
         </div>
